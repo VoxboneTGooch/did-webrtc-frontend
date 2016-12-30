@@ -1,0 +1,64 @@
+doctype html
+html(lang='en')
+  block head
+    if process.env.NEW_RELIC_LICENSE_KEY
+      != newrelic.getBrowserTimingHeader()
+
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(content="The Workshop did2webr.tc" name="keywords")
+    meta(name='description', content='Take calls in minutes just using your browser - no installs, no plug-ins, no hassle. did2webr.tc is a cloud-based WebRTC gateway service based on the Voxbone Workshop WebRTC-to-SIP Gateway Service.')
+    meta(property='og:description', content='Take calls in minutes just using your browser - no installs, no plug-ins, no hassle. did2webr.tc is a cloud-based WebRTC gateway service based on the Voxbone Workshop WebRTC-to-DID Gateway Service.')
+    meta(property='og:title', content='Webphone for Everyone')
+    meta(property='og:url', content='https://did2webr.tc/')
+    meta(property='og:image', content='https://did2webr.tc/images/did2web-bg.jpg')
+    meta(property='og:description', content='Take calls in minutes just using your browser - no installs, no plug-ins, no hassle. did2webr.tc is a cloud-based WebRTC gateway service based on the Voxbone Workshop WebRTC-to-DID Gateway Service.')
+    meta(property='og:site_name', content='DID2WebRTC - A Workshop Project')
+    meta(property='og:type', content='website')
+    title DID2WebR.TC by Voxbone
+    link(href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet")
+    link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" id="font-awesome-css" media="screen" rel="stylesheet" type="text/css")
+    link(href="/stylesheets/root.css", rel="stylesheet")
+    link(href="//cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css", rel="stylesheet")
+
+    script(src="/lib/requirejs/require.js")
+    script(src="/config.js")
+
+    include tracking-scripts/google
+    include tracking-scripts/hotjar
+
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        //- Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button(class="navbar-toggler pull-right hidden-md-up" type="button" data-toggle="collapse" data-target="#bd-main-nav" aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation") ☰
+        .collapse.navbar-toggleable-sm.pull-right(id="bd-main-nav")
+          if authenticated
+            ul.nav.navbar-nav
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle#navbarDropdownMenuLink1(data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Phone
+                .dropdown-menu(aria-labelledby="navbarDropdownMenuLink1")
+                  a.dropdown-item(href="/edit-sip") SIP Settings
+                  a.dropdown-item(href="/edit-notifications") Configure Notifications
+                  a.dropdown-item(href="/phone") Your Phone!
+            ul.nav.navbar-nav
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle#navbarDropdownMenuLink(data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{currentUser.email}
+                  img.gravatar.hidden(src="#{currentUser.gravatar}" alt="user_gravatar")
+                .dropdown-menu(aria-labelledby="navbarDropdownMenuLink")
+                  a.dropdown-item(href="/account/edit") Profile
+                  a.dropdown-item(href="/account/logout") Logout
+          else
+            ul.nav.navbar-nav
+              li.nav-item
+                a.nav-item.nav-link(href="/account/login") Login
+              li.nav-item
+                a.nav-item.nav-link(href="/account/signup") Create account
+
+    block content
+
+    block footer
+      .footer.small-footer
+        p #[a(target="_blank" href="https://www.voxbone.com/acceptable-use-policy") Acceptable Use Policy] | #[a(target="_blank" href="https://www.voxbone.com/privacy-policy") Privacy Policy] | #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Voxbone Conferencing Offload Feedback") Send Feedback] | #[a(target="_blank" href="https://workshop.voxbone.com") A Workshop Project] | #[a(target="_blank" href="https://www.voxbone.com/" style="border-right: 0px;") Copyright ©2016, VOXBONE SA]

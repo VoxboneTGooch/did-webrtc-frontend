@@ -1,0 +1,52 @@
+extends ../layout
+
+append head
+  script.
+    require(
+      ['angular', 'controllers/edit', 'jquery', 'bootstrap'],
+      function (angular, EditController, $) {
+        angular.module('did-webrtc-frontend', [])
+          .controller('EditController', EditController);
+        angular.bootstrap(document, ['did-webrtc-frontend']);
+      });
+
+block content
+  - var userData = JSON.stringify(currentUser)
+  .site-wrapper-inner.home-wrap.edit-account
+    .body(ng-controller="EditController" ng-init=`initData={account: ${userData}}`)
+      .container
+        .row
+          .col-sm-12.col-md-7.col-lg-6
+            .register-content
+              h4 Edit your profile
+
+              #alert.alert(style="display: none;")
+
+              #form_container
+                p You can change your personal information and settings here.
+
+                .formWrap
+                  form#editProfile(name="editProfile" novalidate)
+                    .form-group
+                      label.control-label First Name
+                      input.form-control(placeholder="Name" type="text" id="first_name" name="first_name" ng-model="account.first_name" required)
+                      .error-label(ng-show="editProfile.$submitted || editProfile.first_name.$touched")
+                        div.ng-hide(ng-show="editProfile.first_name.$error.required") Please enter your first name
+                    .form-group
+                      label.control-label Last Name
+                      input.form-control(placeholder="Last Name" type="text" id="last_name" name="last_name" ng-model="account.last_name" required)
+                      .error-label(ng-show="editProfile.$submitted || editProfile.last_name.$touched")
+                        div.ng-hide(ng-show="editProfile.last_name.$error.required") Please enter your last name
+                    .form-group
+                      label.control-label Company
+                      input.form-control(placeholder="Company" type="text" id="company" name="company" ng-model="account.company")
+                    .form-group
+                      label.control-label Phone Number (Optional)
+                      input.form-control(placeholder="Phone Number" type="text" id="phone" name="phone" ng-model="account.phone")
+                    .form-group
+                      label.control-label Email Address
+                      input.form-control(placeholder="email@example.com" type="text" ng-model="account.email" disabled)
+                    .form-group
+                      label.control-label API ID
+                      input.form-control(type="text" ng-model="account.apiBrowsername" disabled)
+                    button.btn.btn-default-custom.btn-block#save(ng-disabled="editProfile.$invalid" ng-click="saveProfile(account)") Save Profile

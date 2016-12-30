@@ -1,0 +1,80 @@
+.register-content {
+  background-color: @panel-color;
+  color: #fff;
+  margin-bottom: 20px;
+  padding: 20px 25px;
+  .reg-header {
+    text-align: center;
+    h4 {
+      font-size: 2.333em;
+      font-weight: 300;
+    }
+    strong {
+      font-weight: 700;
+    }
+    span,
+    strong {
+      display: inline;
+      font-size: 0.933em;
+    }
+  }
+  a {
+    color: #fff;
+    &:hover {
+      color: @color-lgreen;
+    }
+  }
+  form {
+    margin-top: 20px;
+    label {
+      margin-bottom: 2px;
+    }
+    .btn {
+      display: block;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+  }
+  .sub-header {
+    text-align: center;
+    font-size: 1.200em;
+    font-weight: normal;
+  }
+}
+
+.oauth-wrap {
+  text-align: center;
+  font-weight: normal;
+  padding-top: 30px;
+  
+  h4 {
+    margin-bottom: 10px;
+  }
+  a {
+    font-size: 0.8em;
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    background: @color-lgreen;
+    border-color: @color-lgreen;
+    color: @color-white;
+    border-radius: 6px;
+    margin-right: 5px;
+    &:hover {
+      background: darken(@color-lgreen, 5%);
+      text-decoration: none;
+      color: @color-white;
+    }
+    .fa {
+      font-size: 25px;
+    }
+    .btn-txt {
+      font-size: 10px;
+    }
+  }
+}

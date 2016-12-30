@@ -1,0 +1,96 @@
+extends ../layout
+
+append head
+  script(src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer)
+
+  script.
+    require([
+        'angular-recaptcha',
+        'controllers/signup',
+        'directives/password.check',
+        'directives/password.strength'
+      ],
+      function (
+        vcRecaptcha, SignUpController,
+        passwordCheck, passwordStrength) {
+
+        angular.module('did-webrtc-frontend', ['vcRecaptcha'])
+          .directive('pwCheck', passwordCheck)
+          .directive('passwordStrength', passwordStrength)
+          .controller('SignUpController', SignUpController);
+
+        angular.bootstrap(document, ['did-webrtc-frontend']);
+      }
+    );
+
+block content
+  .site-wrapper-inner.home-wrap
+    .body
+      .container
+        .row
+          .col-sm-12.col-md-7.col-lg-6
+            .register-content
+              h4 Create Account
+              if conference_name
+                h3 The conference #{conference_name} seems to be available. Signup and get it!
+              #alert-error.alert.alert-danger.hidden
+              #alert-info.alert.alert-info.hidden
+
+              span.
+                #[strong Note for current Voxbone customers:] you can login with your Voxbone portal account using the Voxbone button below.
+
+              .formWrap.oauth-wrap
+                include social-buttons
+
+              form#create_account(ng-controller="SignUpController" name="create_account" ng-init=`account.uemail='${email || ""}'` novalidate)
+                .form-group
+                  input.form-control(type="hidden" id="ureference" name="ureference" ng-model="account.ureference" ng-init=`account.ureference='${reference || ""}'`)
+                .form-group
+                  label.control-label First Name
+                  input.form-control(placeholder="Name" type="text" id="ufirstname" name="ufirstname" ng-model="account.ufirstname" required)
+                  .error-label(ng-show="create_account.$submitted || create_account.ufirstname.$touched")
+                    .ng-hide(ng-show="create_account.ufirstname.$error.required") Please enter your first name
+                .form-group
+                  label.control-label Last Name
+                  input.form-control(placeholder="Last Name" type="text" id="ulastname" name="ulastname" ng-model="account.ulastname" required)
+                  .error-label(ng-show="create_account.$submitted || create_account.ulastname.$touched")
+                    .ng-hide(ng-show="create_account.ulastname.$error.required") Please enter your last name
+                .form-group
+                  label.control-label Company
+                  input.form-control(placeholder="Company" type="text" id="ucompany" name="ucompany" ng-model="account.ucompany")
+                .form-group
+                  label.control-label Phone Number (optional)
+                  input.form-control(placeholder="Phone Number" type="text" id="uphone" name="uphone" ng-model="account.uphone")
+                .form-group
+                  label.control-label Email address
+                  input.form-control(placeholder="email@example.com" type="text" id="uemail" name="uemail" ng-model="account.uemail" required)
+                  .error-label(ng-show="create_account.$submitted || create_account.uemail.$touched")
+                    .ng-hide(ng-show="create_account.uemail.$error.required") Email is required
+                .form-group
+                  label.control-label Password
+                  input.form-control(placeholder="Your password" type="password" id="upassword" name="upassword" ng-model="account.upassword" required password-strength="account.upassword")
+                  .progress.passwordStrength.ng-hide(ng-show="create_account.upassword.$dirty")
+                    .progress-bar(role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: {{strength_percent}}%" class="{{strength_class}}")
+                      span Strength: {{strength}}!
+                  .error-label(ng-show="create_account.$submitted || create_account.upassword.$touched")
+                    .ng-hide(ng-show="create_account.upassword.$error.required") Password is required
+                    .ng-hide(ng-show="create_account.upassword.$error.minlength") Password must be at least 8 characters in length
+                .form-group
+                  label.control-label Confirm Password
+                  input.form-control(placeholder="Repeat your password" type="password" id="confirmation" name="confirmation" ng-model="account.confirmation" required pw-check="upassword")
+                  .error-label(ng-show="create_account.$submitted || create_account.confirmation.$touched")
+                    .ng-hide(ng-show="create_account.confirmation.$error.pwmatch") Password confirmation does not match
+
+                .form-group.text-center
+                  - var recaptcha_key = `\'${process.env.GOOGLE_RECAPTCHA_SITE_KEY}\'`
+                  .captcha(ng-model="account.recaptcha" vc-recaptcha key=recaptcha_key)
+
+                .form-group
+                  label.control-label
+                    span You must accept our #[a(href="https://www.voxbone.com/acceptable-use-policy") User Policy]
+                    span &nbsp;
+                    input(type="checkbox" id="uaup" name="uaup" ng-model="account.uaup" required)
+
+                a.btn.btn-default-custom#create(ng-disabled="create_account.$invalid" ng-click="processForm()") Create Account
+                br
+                p Already have a Did2Webr.tc account? #[a(href="./login") Login here]

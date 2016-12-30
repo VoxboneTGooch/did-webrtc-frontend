@@ -1,0 +1,54 @@
+extends ../layout
+
+append head
+  script.
+    require(
+      ['angular', 'jquery', 'controllers/login', 'bootstrap'],
+      function (angular, $, LoginController) {
+        angular.module('did-webrtc-frontend', [])
+          .controller('LoginController', LoginController);
+        angular.bootstrap(document, ['did-webrtc-frontend']);
+      });
+
+block content
+  .site-wrapper-inner.home-wrap
+    .body
+      .container
+        .row
+          .col-sm-12.col-md-7.col-lg-6
+            .register-content
+              h4 Login
+
+              while m = message.shift()
+                #tokenError.alert(class='alert-' + m.type)
+                  div= m.message
+
+              #alert-user-pass.alert.alert-danger.hidden Incorrect Email or Password, try again.
+              #alert-unverified.alert.alert-danger.hidden Unverified account. Please check your inbox to validate your email address.
+
+              span.
+                #[strong Note for current Voxbone customers:] you can login with your Voxbone portal account using the Voxbone button below.
+
+              .formWrap
+                .oauth-wrap
+                  include social-buttons
+
+                form#login_form(ng-controller="LoginController" ng-init=`login.uemail='${email || ''}'` name="login_form" novalidate)
+                  .form-group
+                    label.control-label Email
+                    input.form-control(placeholder="email@example.com" type="email" id="uemail" name="uemail" ng-model="login.uemail" required)
+                    .ng-cloak(ng-show="login_form.$submitted || login_form.uemail.$touched")
+                      .error-label(ng-show="login_form.uemail.$error.required") Email is required
+                    .ng-cloak(ng-show="login_form.uemail.$dirty && login_form.uemail.$invalid")
+                      .error-label(ng-show="login_form.uemail.$error.email") Email is invalid
+                  .form-group
+                    label.control-label Password
+                    input.form-control(placeholder="Your password" type="password", id="upassword", name="upassword", ng-model="login.upassword", required)
+                    .ng-cloak(ng-show="login_form.$submitted || login_form.upassword.$touched")
+                      .error-label(ng-show="login_form.upassword.$error.required") Password is required
+
+                  button.btn.btn-default-custom.btn-block#login(ng-disabled="login_form.$invalid" ng-click="login.processForm()") Login
+                  span
+                    a(href="/account/forgot") Forgot your password?
+                    br
+                    a(href="/account/signup") Sign up here

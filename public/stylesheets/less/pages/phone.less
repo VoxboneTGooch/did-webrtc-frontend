@@ -1,0 +1,148 @@
+.call-page-content {
+  background-color: @panel-color;
+  color: #fff;
+  margin-bottom: 20px;
+  font-weight: 100;
+  padding: 20px 25px;
+  h4 {
+    margin-bottom: 30px;
+  }
+  .img-container {
+    position: relative;
+    background: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 10px;
+    img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+  }
+  .call-info {
+    color: #fff;
+    margin-top: 10px;
+    .glyphicon {
+      margin-right:  3px;
+    }
+  }
+  .call-actions {
+    text-align: center;
+    .btn {
+      border-radius: 3px;
+      margin: 0 3px;
+      .glyphicon {
+        font-size: 90%;
+        margin-right: 5px;
+      }
+      &.btn-answer {
+        background: @color-success;
+        color: #fff;
+        &:hover {
+          background: darken(@color-success, 5%);
+        }
+      }
+      &.btn-decline {
+        background: @color-danger;
+        color: #fff;
+        &:hover {
+          background: darken(@color-danger, 5%);
+        }
+      }
+      &.btn-hangup {
+        background: @color-danger;
+        color: #fff;
+        &:hover {
+          background: darken(@color-danger, 5%);
+        }
+      }
+    }
+  }
+}
+
+.call-info {
+  color: black;
+}
+
+.call-button {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.sensor {
+  width: 20px;
+  height: 64px;
+  display: inline-block;
+  margin: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.sensor-01 {
+  background-size: 12px;
+  &.active {
+    background-image: url(../images/sensor-01-green.png);
+  }
+}
+
+.sensor-02 {
+  background-size: 15px;
+  margin-left: -12px;
+  &.active {
+    background-image: url(../images/sensor-02-green.png);
+  }
+}
+
+.sensor-03 {
+  background-size: 19px;
+  margin-left: -12px;
+  &.active {
+    background-image: url(../images/sensor-03-green.png);
+  }
+}
+
+.int-sensor {
+  width:auto;
+  position: absolute;
+}
+
+#microphone {
+  position: absolute;
+  left: 50%;
+  top: 90px;
+  margin-left: 25px;
+  -ms-transform: rotate(7deg); /* IE 9 */
+  -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+  transform: rotate(7deg);
+}
+
+#earphone {
+  position: absolute;
+  left: 50%;
+  top: 5px;
+  margin-left: 25px;
+  -ms-transform: rotate(-7deg); /* IE 9 */
+  -webkit-transform: rotate(-7deg); /* Chrome, Safari, Opera */
+  transform: rotate(-7deg);
+}
+
+#status-message-list {
+  height: 250px;
+  overflow-y: auto;
+}
+
+.disabled {
+  color: @color-mid-light-grey !important;
+}
+
+.call-sip {
+  word-wrap: break-word;
+  font-size: 11px;
+  background: rgba(76,146,116,0.7);
+  margin-bottom: 10px;
+  padding: 10px;
+  p {
+    margin: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+}

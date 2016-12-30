@@ -1,0 +1,124 @@
+extends layout
+
+block footer
+
+prepend head
+  script(src="//cdn.voxbone.com/voxbone/voxbone-2.1.min.js")
+append head
+  script.
+    require(
+      ['angular', 'jquery', 'controllers/home', 'bootstrap', 'click2vox'],
+      function (angular, $, HomeController) {
+        angular.module('did-webrtc-frontend', [])
+          .controller('HomeController', HomeController);
+        angular.bootstrap(document, ['did-webrtc-frontend']);
+      });
+
+block content
+  .site-wrapper-inner.home-wrap
+    .container
+      .row.banner-content
+        .col-sm-12.col-md-8
+
+          h1 Webphone for everyone
+          h2 Answer DID calls from your browser!
+          p Take calls in minutes just using your browser - no installs, no plug-ins, no hassle. did2webr.tc is a cloud-based WebRTC gateway service based on the Voxbone Workshop WebRTC-to-DID Gateway Service. did2webr.tc is perfect for:
+          ul
+            li zero-install remote agents,
+            li seamless click-to-callback, and
+            li web-based UC application integration.
+          p #[a(href="/account/signup/") Sign-up], try it out, or see more info below.
+  .home-setup(id="setup")
+    .container
+      .row
+        .col-xs-12
+          h3 Setup
+            span  in 3 Easy Steps
+
+      .row.color-boxes
+        .col-sm-12.col-md-4
+          .setup-grid.setup-inside-block
+            a(href="/edit-sip/")
+              img(alt="Setup SIP" src="../../images/pick-did.png")
+            h5 Pick DID
+            p Select a DID from our pool
+
+        .col-sm-12.col-md-4
+          .setup-grid.setup-inside-block
+            a(href="/edit-notifications/")
+              img(alt="Notifications" src="../../images/notifications.png")
+            h5 Notification settings
+            p Pick incoming call notification options
+
+        .col-sm-12.col-md-4
+          .setup-grid.setup-inside-block
+            a(href="/phone/")
+              img(alt="Phone" src="../../images/phone.png")
+            h5 Answer the Phone!
+            p Pick up the phone when someone calls
+
+      .row
+        .col-xs-12
+          h3 Want to
+            span  try it now?
+
+      .row.home-buttons
+        .col-sm-12.col-md-6.offset-md-3
+          if authenticated
+            a.btn.btn-default-custom(href='/edit-sip') Setup my phone
+          else
+            a.btn.btn-default-custom(href='/demo') Pick a Call
+
+  .contact(id="contact")
+    .container
+      .padding-contact
+        .row
+          .col-md-4.address
+            h3 Address
+            address
+              |535 Mission St
+              br
+              |San Francisco
+              br
+              |CA 94105
+              br
+              |USA #[span Tel: +1 415 520 505]
+              button.btn.btn-default(onclick="document.getElementById('launch_call').click();" type="submit") Click-to-Call
+              span
+                a(href=
+              "https://www.voxbone.com/" target="_blank")
+                  img(alt="" src="../../images/voxbone-logo.png")
+
+          .col-md-4
+            h3 Links
+            ul.links
+              li
+                a(href="https://www.voxbone.com/" target="blank") Voxbone Website
+              li
+                a(href="http://blog.voxbone.com/" target="blank") Voxbone Blog
+              li
+                a(href="https://developers.voxbone.com/" target="blank") Voxbone Developers Platform
+              li
+                a(href="https://www.linkedin.com/company/voxbone" target="blank") Follow us on LinkedIn
+              li
+                a(href="https://plus.google.com/+VoxboneSA/posts" target="blank") Follow us on Google+
+              li
+                a(href="https://twitter.com/voxbone" target="blank") Follow us on Twitter
+              li
+                a(href="https://www.facebook.com/VoxboneSA" target="blank") Follow us on Facebook
+
+          .col-md-4.newsletter
+            h3 Stay in touch
+            form
+              .form-group
+                label(for="exampleInputName2") Name
+                input.form-control(id="exampleInputName2" placeholder="Name" type="text")
+              .form-group
+                label(for="exampleInputEmail4") Email
+                input.form-control(id="exampleInputEmail4" placeholder="email@example.com" type="email")
+              button.btn.btn-default(type="submit") Sign up for Newsletter
+
+    .footer
+      p #[a(target="_blank" href="https://www.voxbone.com/acceptable-use-policy") Acceptable Use Policy] | #[a(target="_blank" href="https://www.voxbone.com/privacy-policy") Privacy Policy] | #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Voxbone Conferencing Offload Feedback") Send Feedback] | #[a(target="_blank" href="https://workshop.voxbone.com") A Workshop Project] | #[a(target="_blank" href="https://www.voxbone.com/" style="border-right: 0px;") Copyright ©2016, VOXBONE SA]
+
+  #voxButton_575b3d7e89005411004db935.voxButton(data-button_id='575b3d7e89005411004db935' data-text='click2vox Us Now' data-redirect_url='https://voxbone.com' data-did='883510080408' data-dial_pad='true' data-context='' data-send_digits='' data-caller_id='Click2Vox' data-incompatible_browser_configuration='hide_widget' data-show_frame='false' data-show_branding='false' data-use_default_button_css='false' data-div_css_class_name='hidden' data-test_setup='false' data-button_css_class_name='btn btn-purple')

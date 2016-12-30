@@ -1,0 +1,61 @@
+extends layout
+
+append head
+  script.
+    require([
+      'angular',
+      'controllers/editNotifications'
+    ],
+    function (angular, EditNotificationsController, jQueryMask) {
+      angular.module('did-webrtc-frontend', [])
+        .controller('EditNotificationsController', EditNotificationsController);
+      angular.bootstrap(document, ['did-webrtc-frontend']);
+    });
+
+block content
+  - var userData = JSON.stringify(currentUser)
+  .site-wrapper-inner.home-wrap
+    .container(ng-controller="EditNotificationsController" ng-init=`initData={account: ${userData}}`)
+      .notifications-content.ng-cloak.col-md-6.col-md-offset-3
+        .col-xs-12
+          h4 Edit Notifications
+        .col-xs-12
+          .form-group
+
+            label Ringtone
+            .preview-ringtone
+              select.form-control(ng-model="account.ringtone")
+                option(value="office") Office
+                option(value="legacy") legacy
+                option(value="old") Old
+                option(value="crystal") Crystal
+              button.btn.noti-play(ng-show="!playing" ng-click="play()")
+                span.glyphicon.glyphicon-play
+              button.btn.noti-pause(ng-show="playing" ng-click="pause()")
+                span.glyphicon.glyphicon-pause
+
+          .checkbox
+            label
+              input(type="checkbox" disabled)
+              |Browser Notification
+              span.badge(data-toggle='tooltip' data-placement="right" title="Enable pop-up notifications to from your browser") ?
+
+        .col-xs-12
+          .form-group
+            .checkbox
+              label
+                input(type="checkbox" disabled)
+                |Auto Load
+                span.badge(data-toggle='tooltip' data-placement="right" title="Automatically load when your browser starts") ?
+
+        .col-xs-12
+          .form-group
+            label SMS &nbsp;
+              span.badge(data-toggle='tooltip' data-placement="right" title="Enter a phone number for SMS alerts on incoming calls") ?
+            input(type="text" class="form-control" disabled)
+
+          .form-group(ng-cloak)
+            button.btn.btn-default-custom.pull-right.button-block(ng-click="saveNotifications()" name="skipBtn") {{ saveButtonText }}
+
+        .text-center.error-label(ng-show="savingError") Your configuration cannot be saved. Please try again
+        .text-center.success-label(ng-show="savedSuccessfully") Your configuration has been saved successfully! #[a.btn(href="/phone") View your web phone!]

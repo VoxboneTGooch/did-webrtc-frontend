@@ -1,0 +1,23 @@
+.modal#sipInfo(tabindex="-1" role="dialog")
+    .modal.custom-modal.fade.in
+      .modal-dialog.custom-modal-dialog(role="document")
+        .modal-content.custom-modal-content.edit-sip
+          .modal-header.custom-modal-header
+            button.close(type="button" data-dismiss="modal" aria-label="Close")
+              span(aria-hidden="true") ×
+            h4.modal-title.custom-modal-title(id="myModalLabel") Important SIP setup information
+          .modal-body.custom-modal-body
+            p did2webr.tc currently has the following restrictions for demo usage:
+              br
+              span &#149; No AVPF enabled (coming soon)
+              br
+              span &#149; No peer-to-peer media: Media is terminated for NAT traversal
+              br
+              span &#149; SIP calls must be made with G.711 or OPUS codecs - transcoding is not supported in the demo environment (coming soon)
+              br
+              span &#149; Limited Firefox support - known issues connecting with Jitsi and Xlite to did2webr.tc running on Firefox (fix coming soon); we recommend using Chrome
+
+            span Please contact #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=did2webr.tc") workshop@voxbone.com] for additional details or help.
+
+          .modal-footer.custom-modal-footer
+            button.btn.btn-default-custom(data-dismiss="modal") Ok

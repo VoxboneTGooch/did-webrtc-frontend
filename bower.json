@@ -1,0 +1,25 @@
+{
+  "name": "did-webrtc-frontend",
+  "description": "",
+  "license": "Private",
+  "homepage": "https://github.com/voxbone-workshop/did-webrtc-frontend",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-moment": "^1.0.0",
+    "angular-recaptcha": "^3.0.4",
+    "bootstrap": "3.3.7",
+    "domReady": "^2.0.1",
+    "jquery": "2.2.4",
+    "jquery-mask": "latest",
+    "qtip2": "2.2.1",
+    "requirejs": "^2.2.0",
+    "underscore": "latest"
+  }
+}

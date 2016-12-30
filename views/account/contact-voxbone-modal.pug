@@ -1,0 +1,18 @@
+.modal.fade.add-new-modal#myModal(tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+  .modal-dialog(role="document")
+    .modal-content
+      .modal-header
+        button.close(type="button" class="" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true")&times;
+        h4.modal-title#myModalLabel
+          i.glyphicon.glyphicon-exclamation-sign
+          span  Add an Additional SIP URI
+      .modal-body
+        p#[strong Thanks!]
+        p We will review your request and get back to you soon.
+        p#[strong Can’t wait?]
+        p Please contact us using one of the buttons below.
+      .modal-footer
+        button.btn.btn-purple(type="button" id="callVoxbone") Click to Call Us
+        a(href="mailto:workshop@voxbone.com?subject=%5BCLICK2VOX%5D%20About%20Upgrading")
+          button.btn.btn-success(type="button") Click to Email Us

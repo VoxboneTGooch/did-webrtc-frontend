@@ -1,0 +1,65 @@
+extends layout
+
+prepend head
+  script(src="//rawgit.com/voxbone-workshop/webrtc-js/inbound/dist/voxbone-2.2.0-alpha.js")
+append head
+  script.
+    require([
+      'angular',
+      'controllers/demo'
+    ],
+    function (angular, DemoController, jQueryMask) {
+      angular.module('did-webrtc-frontend', [])
+        .controller('DemoController', DemoController);
+      angular.bootstrap(document, ['did-webrtc-frontend']);
+    });
+
+block content
+  .site-wrapper-inner.home-wrap.demo-page
+    .container(ng-controller="DemoController" ng-init=`init("${vox_username}", "${vox_password}", "${ringtone}", "${apiBrowsername}")`)
+      .row
+        .ng-cloak.col-md-12
+          .row
+            .col-md-6
+              .panel.call-page-content
+                h4 Place a test call
+                h5 Use a phone to call:
+                .internalSip
+                  span sip:#{internal_sip}
+                .text-center.or OR
+                h5 Use WebRTC to call from your browser
+                .text-center
+                  .voxButton#voxButton
+                    link(rel="stylesheet" href="https://click2vox.com/stylesheets/widget.css?v=200")
+                    script(src="https://click2vox.com/javascripts/widget.js?v=200")
+                    iframe#call_button_frame(width="300" height="183" frameBorder="0" scrolling="no" src=`https://click2vox.com/voxbone_widget/${widget_id}`)
+                    #control
+                .text-center.or OR
+                h5 Use click2vox.com to generate your own WebRTC click-to-call button
+                .text-center.button-link
+                  a.btn.btn-default-custom.button-block(href="https://click2vox.com") click2vox.com
+                .clearfix
+            .col-md-6
+              .call-page-content.panel
+                h4 Click-to-answer your call
+                .col-md-6
+                  #status-message-list
+                .col-md-6
+                  .img-container
+                    #microphone.int-sensor(ng-show="callState == 'ongoing'")
+                    #earphone.int-sensor(ng-show="callState == 'ongoing'")
+                    img(ng-src="{{phoneImg}}")
+                    .call-actions
+                      button.btn.btn-answer.call-button(ng-disabled="callState !== 'receiving'" ng-show="callState !== 'ongoing'" ng-click="answerCall()")
+                        span.glyphicon.glyphicon-ok
+                        | Answer
+                      button.btn.btn-decline.call-button(ng-show="callState == 'receiving'" ng-click="declineCall()")
+                        span.glyphicon.glyphicon-earphone
+                        | Decline
+                      button.btn.btn-hangup.call-button(ng-show="callState == 'ongoing'" ng-click="hangCall()")
+                        span.glyphicon.glyphicon-earphone
+                        | Hang up
+                  .text-center.trouble-connecting
+                    span Trouble connecting? #[a.contact-link(target="_blank" href="mailto:workshop@voxbone.com?subject=did2webrtc connection help") Contact us]
+                h4 Behind the scenes
+                #console

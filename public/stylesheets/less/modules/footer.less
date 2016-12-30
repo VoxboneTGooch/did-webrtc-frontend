@@ -1,0 +1,90 @@
+.contact {
+  background: @footer-color;
+  color: @color-white;
+}
+.padding-contact {
+  padding: 100px 0;
+  font-family: @secondary-font;
+  h3 {
+    font-family: @primary-font;
+    font-size: 24px;
+    font-weight: 300;
+    padding: 20px 0px 20px 0px;
+    text-transform: uppercase;
+  }
+  address {
+    font-size: 1.067em;
+    line-height: 24px;
+    font-weight: normal;
+    span {
+      display: block;
+      margin-top: 10px;
+    }
+  }
+  .links {
+    margin: 0;
+    padding: 0;
+    li {
+      display: block;
+      text-align: left;
+      line-height: 24px;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      a {
+        text-decoration: none;
+        color: @color-white;
+        font-weight: normal;
+        &:hover {
+          color: @color-lgreen-light;
+        }
+      }
+    }
+  }
+  .newsletter {
+
+    form {
+
+      .btn {
+        width: 100%;
+      }
+    }
+    label {
+      margin: 0;
+      font-weight: normal;
+    }
+  }
+}
+.footer {
+  padding: 0px 20px 50px 20px;
+  p {
+    font-size: 0.933em;
+    text-align: center;
+    font-weight: normal;
+    a {
+      color: @color-white;
+      text-decoration: none;
+      &:hover {
+        color: @color-lgreen;
+      }
+    }
+  }
+  &.small-footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    display: inline-block;
+    padding: 0 !important;
+    background-color: rgba(76, 146, 116, 0.7);
+    z-index: 5;
+    p {
+      margin-bottom: 0;
+      a {
+        &:hover{
+          color: #f5f5f5;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

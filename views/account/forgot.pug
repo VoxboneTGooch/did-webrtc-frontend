@@ -1,0 +1,41 @@
+extends ../layout
+
+append head
+  script.
+    require(
+      ['angular', 'jquery', 'controllers/forgot', 'bootstrap'],
+      function (angular, $, ForgotController) {
+        angular.module('did-webrtc-frontend', [])
+          .controller('ForgotController', ForgotController);
+        angular.bootstrap(document, ['did-webrtc-frontend']);
+      });
+
+block content
+  .site-wrapper-inner.home-wrap
+    .body
+      .container
+        .row
+          .col-sm-12.col-md-7.col-lg-6
+            .register-content
+              h1 Forgot Password
+
+              if message
+                #tokenError.alert.alert-danger
+                  div= message
+              #errormsg.alert.alert-danger.hidden
+              #successmsg.alert.alert-success.hidden
+
+              span.
+                Please write down your address and we will send you an email with the reset instructions. Check your inbox and/or spam folder
+
+              .formWrap
+                form#forgot_form(ng-controller="ForgotController" ng-init=`forgot.uemail=${email}` name="forgot_form" novalidate)
+                  .form-group
+                    label.control-label Email
+                    input.form-control(type="email" id="uemail" name="uemail" ng-model="forgot.uemail" required placeholder="email@email.com")
+                    .error-label(ng-cloak ng-show="forgot_form.$submitted || forgot_form.uemail.$touched")
+                      div(ng-show="forgot_form.uemail.$error.required") Email is required
+                    .error-label(ng-cloak ng-show="forgot_form.uemail.$dirty && forgot_form.uemail.$invalid")
+                      div(ng-show="forgot_form.uemail.$error.email") Email is invalid
+
+                  a.btn.btn-default-custom#forgot(ng-disabled="forgot_form.$invalid || submitting" ng-click="processForm()") Reset Password
