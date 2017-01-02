@@ -86,6 +86,7 @@ router.post('/linkDIDs', utils.isLoggedIn, function(req, res, next) {
     ],
     function(err, didsInfo) {
       var index = didsInfo.indexOf(null);
+
       if (index != -1)
         didsInfo.splice(index, 1);
 
@@ -218,5 +219,30 @@ router.put('/editUser', utils.isLoggedIn, function(req, res, next) {
 
   request(options, callback);
 });
+
+function getDidInfo(DID, async_callback) {
+  var filteredDID = '';
+  if (DID)
+    filteredDID = DID.replace(/\D/g, '');
+  var options = {
+    url: process.env.VOXBONE_PROVISIONING_API_URL + "/inventory/did?e164Pattern=%25" + filteredDID + "&pageNumber=0&pageSize=1",
+    headers: utils.provisioningApiHeaders,
+    auth: utils.provisioningApiCredentials
+  };
+
+  function callback(error, response, body) {
+    var info = JSON.parse(body);
+    async_callback(null, {
+      id: info.dids[0].didId,
+      voiceUriId: info.dids[0].voiceUriId,
+      e164: info.dids[0].e164
+    });
+  }
+
+  if (DID)
+    request(options, callback);
+  else
+    async_callback(null, null);
+}
 
 module.exports = router;

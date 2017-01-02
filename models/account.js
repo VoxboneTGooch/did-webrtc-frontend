@@ -58,6 +58,7 @@ var accountSchema = new Schema({
   voxbone_id: String,
   referrer: String,
   apiBrowsername: String,
+  voiceUriId: Number,
   ringtone: {
     type: String,
     default: "office"
@@ -80,8 +81,11 @@ accountSchema.pre('save', function (next) {
 
   if (!self.apiBrowsername) {
     console.log('Creating User for ' + self.email + '!');
-    utils.createUser(self, utils.haiku(), function(){
-      next();
+    var apiBrowsername = utils.haiku();
+    utils.createUser(self, apiBrowsername, function(){
+      utils.saveVoiceUri(self, apiBrowsername, function(result){
+        next();
+      });
     });
   } else {
     next();
