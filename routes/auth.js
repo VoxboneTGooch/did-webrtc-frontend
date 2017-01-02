@@ -7,7 +7,7 @@ var router = express.Router();
 var passport = require('passport');
 
 var callbackRedirects = {
-  successRedirect : '/edit-sip',
+  successRedirect : '/pick-did',
   failureRedirect : '/account/login'
 };
 

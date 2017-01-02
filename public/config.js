@@ -61,6 +61,7 @@ require.config({
       '/lib/bootstrap/dist/js/bootstrap.min'
     ],
     click2vox: 'https://voxbone.com/click2vox/click2vox',
+    countrySelect: '/lib/country-select-js/build/js/countrySelect.min',
     jquery: [
       '//code.jquery.com/jquery-2.2.4.min',
       '/lib/jquery/dist/jquery.min'

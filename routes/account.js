@@ -51,7 +51,7 @@ router.post('/login', function (req, res, next) {
       console.log(result);
       return res.status(403).json(result);
     } else {
-      result = { message: "", errors: null, redirect: '/edit-sip', email: formData.email };
+      result = { message: "", errors: null, redirect: '/pick-did', email: formData.email };
 
       req.logIn(account, function (err) {
         return res.status(200).json(result);
@@ -176,7 +176,7 @@ router.post('/signup', recaptcha.middleware.verify, function (req, res, next) {
 
       if (result.verified) {
         req.logIn(theAccount, function (err) {
-          result.redirect = "/edit-sip/";
+          result.redirect = "/pick-did/";
           res.status(200).json(result);
         });
       } else {

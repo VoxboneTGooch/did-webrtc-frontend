@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 var dbURI = process.env.MONGODB_URI || 'mongodb://localhost/did-webrtcDB';
 var Account = require('../models/account');
+var Country = require('../models/country');
 var Demo = require('../models/demo');
 var request = require('request');
+var utils = require('../routes/utils');
 
 mongoose.connect(dbURI);
 
@@ -35,8 +37,10 @@ function generateDemos (index) {
     var internalSip = process.env.VOXBONE_WEBRTC_USERNAME + "+demo" + index + "@workshop-gateway.voxbone.com";
     var options = {
       url: 'https://click2vox.com/widget/get-id?sipuri=' + encodeURIComponent(internalSip),
-      method: 'GET'
+      method: 'GET',
+      "rejectUnauthorized": false
     };
+
     if (!demo) {
       request(options, function(error, response, body) {
 
@@ -66,7 +70,52 @@ function generateDemos (index) {
   });
 }
 
-var index = 1;
-generateDemos(index);
+generateDemos(1);
+
+var options = {
+  url: process.env.VOXBONE_PROVISIONING_API_URL + '/inventory/country?pageNumber=0&pageSize=900',
+  method: 'GET',
+  headers: utils.provisioningApiHeaders,
+  auth: utils.provisioningApiCredentials,
+};
+
+function fillCountries(length, index, supportedCountries) {
+  var supportedCountry = supportedCountries[index];
+  Country.findOne({countryCodeA3: supportedCountry.countryCodeA3}, function (err, country) {
+
+    if (!country) {
+      console.log("Filling listed country");
+      var countryNameCapitals = supportedCountry.countryName;
+      var countryNameCamel = countryNameCapitals[0].toUpperCase() + countryNameCapitals.slice(1).toLowerCase();
+      country = new Country(
+        {
+          countryCodeA3: supportedCountry.countryCodeA3,
+          countryName: countryNameCamel,
+          phoneCode: supportedCountry.phoneCode,
+          hasStates: JSON.parse(supportedCountry.hasStates),
+          hasRegulationRequirement: JSON.parse(supportedCountry.hasRegulationRequirement)
+        }
+      );
+      country.save(function (err) {
+        if(index < length - 1)
+          fillCountries(length, index + 1, supportedCountries);
+      });
+    } else if(index < length - 1) {
+      fillCountries(length, index + 1, supportedCountries);
+    }
+
+  });
+}
+
+function callback(error, response, body) {
+
+  if (!error && response.statusCode == 200) {
+    var supportedCountries = JSON.parse(body).countries;
+    fillCountries(supportedCountries.length, 0, supportedCountries);
+  }
+
+}
+
+request(options, callback);
 
 module.exports = dbURI;

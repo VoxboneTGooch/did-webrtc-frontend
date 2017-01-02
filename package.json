@@ -29,6 +29,7 @@
     "grunt-bower-requirejs": "^2.0.0",
     "grunt-nodemon": "^0.4.2",
     "haikunator": "^2.0.0",
+    "i18n-iso-countries": "1.6.0",
     "lodash": "^4.16.4",
     "moment": "^2.16.0",
     "mongoose": "^4.6.4",

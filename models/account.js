@@ -62,6 +62,10 @@ var accountSchema = new Schema({
     type: String,
     default: "office"
   },
+  dids: {
+    type: [Schema.Types.Mixed],
+    default: []
+  }
 });
 
 accountSchema.pre('save', function (next) {

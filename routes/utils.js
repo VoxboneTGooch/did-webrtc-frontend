@@ -1,9 +1,21 @@
 var _ = require('lodash');
 var Haikunator = require('haikunator');
 var haikunator = new Haikunator();
+var isoCountries = require("i18n-iso-countries");
 
 // Here it goes only utility methods
 module.exports = {
+
+  provisioningApiCredentials: {
+    'user': process.env.VOXBONE_API_USERNAME,
+    'pass': process.env.VOXBONE_API_PASSWORD
+  },
+
+  provisioningApiHeaders: {
+    'Accept': 'application/json',
+    'Content-type': 'application/json',
+    'User-Agent': 'request'
+  },
 
   sip2webrtcApiHeaders: {
     'Authorization': 'Basic ' + process.env.SIP_TO_WEBRTC_API_BASIC_AUTH,
@@ -18,7 +30,7 @@ module.exports = {
 
   redirectIfLoggedIn: function(req, res, next) {
     if (req.isAuthenticated())
-      return res.redirect('/edit-sip');
+      return res.redirect('/pick-did');
     return next();
   },
 
@@ -80,6 +92,21 @@ module.exports = {
 
       }
     );
+  },
+
+  getListedCountries: function(callback) {
+    var Country = require('../models/country');
+    var result = [];
+    Country.find({}, function (err, listedCountries) {
+      for(var i = 0; i < listedCountries.length; i++) {
+        result.push({
+          "name": listedCountries[i].countryName + ' (' + listedCountries[i].phoneCode + ') - Request',
+          "iso2": (isoCountries.alpha3ToAlpha2(listedCountries[i].countryCodeA3) || 'WLD').toLowerCase(),
+          "DID": null
+        });
+      }
+      callback(result);
+    });
   },
 
   getVoxRoutes: function() {

@@ -58,10 +58,12 @@ router.get('/ping', function (req, res, next) {
   res.json({ 'ping': Date.now(), 'version': pjson.version });
 });
 
-router.get('/edit-SIP', utils.isLoggedIn, function (req, res, next) {
-  res.render('edit-sip', {
-    voxbone_webrtc_username: voxrtc_username
-  });
+router.get('/pick-did', utils.isLoggedIn, function (req, res, next) {
+  var userDids = res.locals.currentUser.dids;
+  if(userDids.length)
+    res.render('show-did', {dids: userDids});
+  else
+    res.render('pick-did');
 });
 
 router.get('/edit-notifications', utils.isLoggedIn, function (req, res, next) {
