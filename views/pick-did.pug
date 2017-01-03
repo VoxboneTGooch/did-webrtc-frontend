@@ -1,0 +1,49 @@
+extends layout
+
+append head
+  link(rel="stylesheet" href="/lib/country-select-js/build/css/countrySelect.min.css")
+  script.
+    require(
+      ['domReady', 'angular', 'controllers/pickDID', 'bootstrap'],
+      function (domReady, angular, PickDIDController) {
+        domReady(function () {
+          angular.module('voxconf-frontend', []).controller('PickDIDController', PickDIDController);
+          angular.bootstrap(document, ['voxconf-frontend']);
+        });
+    });
+
+block content
+  body(ng-controller="PickDIDController")
+    .body
+      .site-wrapper-inner.home-wrap
+        .container
+          .register-content.ng-cloak
+            h1 Select DID Numbers
+            p You can choose one or two available DID numbers. They will be linked to your conferencing Bridge.
+            .alert.text-center(class = "alert-{{apiAlert.cssType}}" ng-show="apiAlert.message") {{apiAlert.message}}
+            div(ng-show = "showCountryPickers")
+              a(href="" ng-click="showOptionalDid = !showOptionalDid; updateSelectors();") {{showOptionalDid ? 'Add just one DID' : 'Add a second DID'}}
+            hr
+            .cnt-select-container(ng-hide="showCountryPickers")
+              span {{didRetrieveMessage}}
+            .cnt-select-container(ng-show="showCountryPickers")
+              .cnt-picker
+                input#country1.countrySelector(type="text")
+                .well.bridge-number
+                  span(ng-show="DID1.did_number") Your bridge 1st DID #: {{DID1.did_number}}
+                  span(ng-hide="DID1.did_number") Please #[a(href="#" ng-click="mailTo(DID1.name)") Contact us] in order to get DIDs for this country
+
+              .cnt-picker(ng-show="showOptionalDid && !unavailableSecondDid")
+                input#country2.countrySelector(type="text")
+                .well.bridge-number
+                  span(ng-show="DID2.did_number") Your bridge 2nd DID #: {{DID2.did_number}}
+                  span(ng-hide="DID2.did_number") Please #[a(href="#" ng-click="mailTo(DID2.name)") Contact us] in order to get DIDs for this country
+
+              .cnt-picker(ng-show="showOptionalDid && unavailableSecondDid")
+                .well.bridge-number We are sorry, there's only one DID left.
+
+              br
+              button.btn.btn-default-custom(ng-disabled="!(DID1.did_number && (!showOptionalDid || DID2.did_number))" type="button" ng-click="linkDIDs()") Link DID#[span(ng-show="showOptionalDid") s]
+
+            .row
+              .bottom-note Need more numbers or different countries? #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Conferencing") Contact Us]
