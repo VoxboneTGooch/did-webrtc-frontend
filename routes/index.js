@@ -72,10 +72,16 @@ router.get('/edit-notifications', utils.isLoggedIn, function (req, res, next) {
 
 router.get('/phone', utils.isLoggedIn, function (req, res, next) {
   var ringtone = res.locals.currentUser.ringtone;
+  var userDid = null;
+
+  if (res.locals.currentUser.dids.length)
+    userDid = res.locals.currentUser.dids;
+
   voxrtc_config = voxbone.generate();
   vox_username = voxrtc_username;
   vox_password = voxrtc_secret;
   res.render('phone', {
+    dids: userDid,
     voxbone_webrtc_username: voxrtc_username,
     ringtone: ringtone
   });

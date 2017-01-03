@@ -2,6 +2,7 @@ extends layout
 
 prepend head
   script(src="//rawgit.com/voxbone-workshop/webrtc-js/inbound/dist/voxbone-2.2.0-alpha.js")
+  link(rel="stylesheet" href="/lib/flag-icon-css/css/flag-icon.min.css")
 append head
   script.
     require([
@@ -21,13 +22,25 @@ block content
         .row
           .col-md-6
             h4 Call Page
+            .well.bridge-number
+              .text-center
+                if dids
+                  span Your bridge DID #:
+                  br
+                  span.fa.fa-globe(ng-show=`'${dids[0].country_iso2}' == 'wld'`)
+                  div.flag-icon(ng-hide=`'${dids[0].country_iso2}' == 'wld'` class=`flag-icon-${dids[0].country_iso2}`)
+                  |&nbsp; #{dids[0].did_number}
+                else
+                  span This Web-Phone has no liked DID.
+            hr
             #status-message-list
           .col-md-6
             h6 Call this phone from:
             .call-sip
               p Internal SIP: &nbsp; sip:#{voxbone_webrtc_username}+{{user.browserUsername}}@workshop-gateway.voxbone.com
-              br
-              p(ng-show="user.sipPassword && user.sipUsername && registrar") Your SIP: &nbsp; sip:{{user.sipUsername}}@{{registrar}}
+              if dids
+                br
+                p From the PSTN: #{dids[0].did_number}
             .img-container
               #microphone.int-sensor(ng-show="callState == 'ongoing'")
                 #mic1.sensor.sensor-01
