@@ -73,7 +73,7 @@ router.post('/linkDIDs', utils.isLoggedIn, function(req, res, next) {
   };
 
   if (req.body.length == 2)
-    DID2 = req.body[1];
+    return res.status(400).json("You are only allowed to link one DID");
 
   //gets 2 DID ids
   async.parallel([

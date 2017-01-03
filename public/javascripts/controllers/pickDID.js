@@ -43,9 +43,9 @@ define([
       $scope.$apply();
     });
 
-    $scope.linkDIDs = function () {
+    $scope.linkDID = function () {
       $scope.apiAlert = {
-        message: "Provisioning DIDs, please wait...",
+        message: "Provisioning DID, please wait...",
         cssType: "info"
       };
 
@@ -65,7 +65,7 @@ define([
 
       $http(req).then(function () {
         $scope.apiAlert = {
-          message: "This DIDs have been succesfuly linked to your bridge, redirecting...",
+          message: "This DID has been succesfuly linked to your webphone, redirecting...",
           cssType: "success"
         };
 
@@ -78,9 +78,9 @@ define([
         var takenMessage = '';
 
         if (rejectedDids.length == 1)
-          takenMessage = "Please Select another set of DIDs, the DID " + rejectedDids[0] + " has already been taken.";
+          takenMessage = "Please Select another DID, the DID " + rejectedDids[0] + " has already been taken.";
         if (rejectedDids.length == 2)
-          takenMessage = "Please Select another set of DIDs, both DIDS you chose have already been taken (" + rejectedDids[0] + ", " + rejectedDids[1] + ")";
+          takenMessage = "Please Select another DID, both DIDS you chose have already been taken (" + rejectedDids[0] + ", " + rejectedDids[1] + ")";
 
         $scope.apiAlert = {
           message: takenMessage,
