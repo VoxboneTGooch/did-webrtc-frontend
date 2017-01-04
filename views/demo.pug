@@ -2,6 +2,7 @@ extends layout
 
 prepend head
   script(src="//rawgit.com/voxbone-workshop/webrtc-js/inbound/dist/voxbone-2.2.0-alpha.js")
+  link(rel="stylesheet" href="/lib/flag-icon-css/css/flag-icon.min.css")
 append head
   script.
     require([
@@ -23,6 +24,17 @@ block content
             .col-md-6
               .panel.call-page-content
                 h4 Place a test call
+                h5 Call from the PSTN:
+                .dids-container.text-center
+                  .well.bridge-number
+                    span.fa.fa-globe(ng-show=`'${dids[0].country_iso2}' == 'wld'`)
+                    div.flag-icon(ng-hide=`'${dids[0].country_iso2}' == 'wld'` class=`flag-icon-${dids[0].country_iso2}`)
+                    |&nbsp; #{dids[0].did_number}
+                  .well.bridge-number
+                    span.fa.fa-globe(ng-show = `'${dids[1].country_iso2}' == 'wld'`)
+                    div.flag-icon(ng-hide = `'${dids[1].country_iso2}' == 'wld'` class=`flag-icon-${dids[1].country_iso2}`)
+                    | &nbsp; #{dids[1].did_number}
+                .text-center.or OR
                 h5 Use a phone to call:
                 .internalSip
                   span sip:#{internal_sip}
@@ -34,10 +46,7 @@ block content
                     script(src="https://click2vox.com/javascripts/widget.js?v=200")
                     iframe#call_button_frame(width="300" height="183" frameBorder="0" scrolling="no" src=`https://click2vox.com/voxbone_widget/${widget_id}`)
                     #control
-                .text-center.or OR
-                h5 Use click2vox.com to generate your own WebRTC click-to-call button
-                .text-center.button-link
-                  a.btn.btn-default-custom.button-block(href="https://click2vox.com") click2vox.com
+                    h6 Use #[a.contact-link(href="https://click2vox.com") click2vox] to generate your own WebRTC
                 .clearfix
             .col-md-6
               .call-page-content.panel

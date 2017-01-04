@@ -6,7 +6,11 @@ var demoSchema = new Schema({
   sip: String,
   widget_id: String,
   created_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  dids: {
+    type: [Schema.Types.Mixed],
+    default: []
+  }
 });
 
 demoSchema.pre('save', function(next){

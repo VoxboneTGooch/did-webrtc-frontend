@@ -108,7 +108,8 @@ router.get('/demo', function (req, res, next) {
         apiBrowsername: theDemo.name,
         ringtone: 'office',
         widget_id: theDemo.widget_id,
-        internal_sip: theDemo.sip
+        internal_sip: theDemo.sip,
+        dids: theDemo.dids
       });
   });
 });

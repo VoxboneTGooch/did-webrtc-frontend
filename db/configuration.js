@@ -40,6 +40,10 @@ function generateDemos (index) {
       method: 'GET',
       "rejectUnauthorized": false
     };
+    var dids = [
+      {"did_number":"+555555555", "country_iso2":"us"},
+      {"did_number":"+555555555", "country_iso2":"be"}
+    ];
 
     if (!demo) {
       request(options, function(error, response, body) {
@@ -51,6 +55,7 @@ function generateDemos (index) {
               name: "demo" + index,
               sip: internalSip,
               widget_id: JSON.parse(body) || "Get manually from click2vox",
+              dids: dids
             }
           );
           demo.save(function (err) {
