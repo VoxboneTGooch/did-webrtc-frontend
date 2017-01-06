@@ -257,7 +257,7 @@ router.post('/reset/:token', function (req, res) {
       result = { message: "An error has ocurred.", errors: err };
       return res.status(400).json(result);
     }else{
-      result = { message: "Your password has been changed.", errors: null, redirect: '/edit-bridge' };
+      result = { message: "Your password has been changed.", errors: null, redirect: '/pick-did' };
       return res.status(200).json(result);
     }
   });
