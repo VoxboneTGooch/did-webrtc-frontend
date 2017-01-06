@@ -23,7 +23,10 @@ define([
         }
 
         var elem = document.getElementById('console');
-        elem.scrollTop = elem.scrollHeight;
+
+        if (elem)
+          elem.scrollTop = elem.scrollHeight;
+
       };
     }
 
