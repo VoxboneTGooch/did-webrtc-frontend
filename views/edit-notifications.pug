@@ -37,7 +37,7 @@ block content
           .checkbox
             label
               input(type="checkbox" disabled)
-              |Browser Notification
+              |Browser Notification &nbsp;
               span.badge(data-toggle='tooltip' data-placement="right" title="Enable pop-up notifications to from your browser") ?
 
         .col-xs-12
@@ -45,14 +45,14 @@ block content
             .checkbox
               label
                 input(type="checkbox" disabled)
-                |Auto Load
+                |Auto Load &nbsp;
                 span.badge(data-toggle='tooltip' data-placement="right" title="Automatically load when your browser starts") ?
 
         .col-xs-12
           .form-group
             label SMS &nbsp;
               span.badge(data-toggle='tooltip' data-placement="right" title="Enter a phone number for SMS alerts on incoming calls") ?
-            input(type="text" class="form-control" disabled)
+            input(type="text" class="form-control" value="Coming soon.." disabled)
 
           .form-group(ng-cloak)
             button.btn.btn-default-custom.pull-right.button-block(ng-click="saveNotifications()" name="skipBtn") {{ saveButtonText }}

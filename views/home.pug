@@ -21,13 +21,14 @@ block content
         .col-sm-12.col-md-8
 
           h1 Webphone for everyone
-          h2 Answer DID calls from your browser!
-          p Take calls in minutes just using your browser - no installs, no plug-ins, no hassle. did2webr.tc is a cloud-based WebRTC gateway service based on the Voxbone Workshop WebRTC-to-DID Gateway Service. did2webr.tc is perfect for:
+          h2 Answer phone calls from your browser!
+          p Take calls from your browser. One minute configuration, no installs, no plug-ins, no hassle. did2webr.tc is a cloud-based WebRTC gateway service based on the Voxbone Workshop WebRTC Gateway Service. Click-to-answer with did2webr.tc is perfect for:
           ul
             li zero-install remote agents,
-            li seamless click-to-callback, and
-            li web-based UC application integration.
-          p #[a(href="/account/signup/") Sign-up], try it out, or see more info below.
+            li seamless click-to-callback,
+            li web-based UC application integration,
+            li creative consumer web apps!
+          p #[a(href="/account/signup/") Sign-up], #[a(href="/demo") try it out], or see more info #[a(href="#setup") below].
   .home-setup(id="setup")
     .container
       .row
@@ -41,7 +42,7 @@ block content
             a(href="/pick-did/")
               img(alt="Setup SIP" src="../../images/pick-did.png")
             h5 Pick DID
-            p Select a DID from our pool
+            p Select a DID from our global pool
 
         .col-sm-12.col-md-4
           .setup-grid.setup-inside-block
@@ -63,11 +64,14 @@ block content
             span  try it now?
 
       .row.home-buttons
-        .col-sm-12.col-md-6.offset-md-3
+        .col-sm-12.col-md-6
+          a.btn.btn-default-custom(href='/demo') Try the demo
+        .col-sm-12.col-md-6
           if authenticated
-            a.btn.btn-default-custom(href='/pick-did') Select a DID
+            a.btn.btn-default-custom(href='/pick-did') Select a number
           else
-            a.btn.btn-default-custom(href='/demo') Pick a Call
+            a.btn.btn-default-custom(href='/account/signup') Create an account
+
 
   .contact(id="contact")
     .container
@@ -119,6 +123,6 @@ block content
               button.btn.btn-default(type="submit") Sign up for Newsletter
 
     .footer
-      p #[a(target="_blank" href="https://www.voxbone.com/acceptable-use-policy") Acceptable Use Policy] | #[a(target="_blank" href="https://www.voxbone.com/privacy-policy") Privacy Policy] | #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Voxbone Conferencing Offload Feedback") Send Feedback] | #[a(target="_blank" href="https://workshop.voxbone.com") A Workshop Project] | #[a(target="_blank" href="https://www.voxbone.com/" style="border-right: 0px;") Copyright ©2016, VOXBONE SA]
+      p #[a(target="_blank" href="https://www.voxbone.com/acceptable-use-policy") Acceptable Use Policy] | #[a(target="_blank" href="https://www.voxbone.com/privacy-policy") Privacy Policy] | #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Voxbone did2webr.tc Feedback") Send Feedback] | #[a(target="_blank" href="https://workshop.voxbone.com") A Workshop Project] | #[a(target="_blank" href="https://www.voxbone.com/" style="border-right: 0px;") Copyright ©2016, VOXBONE SA]
 
-  #voxButton_575b3d7e89005411004db935.voxButton(data-button_id='575b3d7e89005411004db935' data-text='click2vox Us Now' data-redirect_url='https://voxbone.com' data-did='883510080408' data-dial_pad='true' data-context='' data-send_digits='' data-caller_id='Click2Vox' data-incompatible_browser_configuration='hide_widget' data-show_frame='false' data-show_branding='false' data-use_default_button_css='false' data-div_css_class_name='hidden' data-test_setup='false' data-button_css_class_name='btn btn-purple')
+  #voxButton_575b3d7e89005411004db935.voxButton(data-button_id='575b3d7e89005411004db935' data-text='click2vox Us Now' data-redirect_url='https://voxbone.com' data-did='883510080408' data-dial_pad='true' data-context='' data-send_digits='' data-caller_id='Click2Vox_did2webrtc' data-incompatible_browser_configuration='hide_widget' data-show_frame='false' data-show_branding='false' data-use_default_button_css='false' data-div_css_class_name='hidden' data-test_setup='false' data-button_css_class_name='btn btn-purple')

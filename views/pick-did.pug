@@ -28,11 +28,11 @@ block content
               .cnt-picker
                 input#country1.countrySelector(type="text")
                 .well.bridge-number
-                  span(ng-show="DID1.did_number") Your bridge 1st DID #: {{DID1.did_number}}
+                  span(ng-show="DID1.did_number") Your phone number is #: {{DID1.did_number}}
                   span(ng-hide="DID1.did_number") Please #[a(href="#" ng-click="mailTo(DID1.name)") Contact us] in order to get DIDs for this country
 
               br
-              button.btn.btn-default-custom(ng-disabled="!(DID1.did_number)" type="button" ng-click="linkDID()") Link DID
+              button.btn.btn-default-custom(ng-disabled="!(DID1.did_number)" type="button" ng-click="linkDID()") Assign Number
 
             .row
-              .bottom-note Need more numbers or different countries? #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Conferencing") Contact Us]
+              .bottom-note Need more numbers or different countries? #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=did2webr.tc") Contact Us]

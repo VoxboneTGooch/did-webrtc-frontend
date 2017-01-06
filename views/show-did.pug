@@ -19,23 +19,19 @@ block content
       .site-wrapper-inner.home-wrap
         .container
             .register-content.ng-cloak
-              h4 Selected DID Numbers
-              p These DID numbers are tied to your conferencing bridge. Please #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Conferencing%20change%20numbers") contact us] for changes or additional numbers.
+              h4 Selected Phone Numbers
+              p The phone number below is tied to your did2webr.tc account. Please #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=did2webrtc%20change%20numbers") contact us] for changes, additional numbers, or to use an existing Voxbone DID.
               hr
               .cnt-select-container
                 .cnt-picker
-                  .well.bridge-number Your bridge 1st DID #:
+                  .well.bridge-number
+                    span Your phone #:
+                    br
                     span.fa.fa-globe(ng-show=`'${dids[0].country_iso2}' == 'wld'`)
                     div.flag-icon(ng-hide=`'${dids[0].country_iso2}' == 'wld'` class=`flag-icon-${dids[0].country_iso2}`)
                     |&nbsp; #{dids[0].did_number}
-                if dids[1]
-                  .cnt-picker
-                    .well.bridge-number Your bridge 2nd DID #:
-                      span.fa.fa-globe(ng-show = `'${dids[1].country_iso2}' == 'wld'`)
-                      div.flag-icon(ng-hide = `'${dids[1].country_iso2}' == 'wld'` class=`flag-icon-${dids[1].country_iso2}`)
-                      | &nbsp; #{dids[1].did_number}
                 br
                 a(href="/edit-notifications")
                   button.btn.btn-default-custom(type="button") Edit Notifications
               .row
-                .bottom-note Need more numbers or more countries #[a(target="_blank" href="https://www.voxbone.com/coverage/voip-coverage") full list]? #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Conferencing") Contact Us]
+                .bottom-note Need more numbers or more countries #[a(target="_blank" href="https://www.voxbone.com/coverage/voip-coverage") full list]? #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=did2webrtc") Contact Us]

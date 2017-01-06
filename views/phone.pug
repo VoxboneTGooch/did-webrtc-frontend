@@ -21,26 +21,21 @@ block content
       .call-page-content.ng-cloak.col-md-12
         .row
           .col-md-6
-            h4 Call Page
+            h4 Call Status
+            #status-message-list
+          .col-md-6
+            h4 Your phone
             .well.bridge-number
               .text-center
                 if dids
-                  span Your bridge DID #:
-                  br
                   span.fa.fa-globe(ng-show=`'${dids[0].country_iso2}' == 'wld'`)
                   div.flag-icon(ng-hide=`'${dids[0].country_iso2}' == 'wld'` class=`flag-icon-${dids[0].country_iso2}`)
-                  |&nbsp; #{dids[0].did_number}
+                  | &nbsp; #{dids[0].did_number}
                 else
                   span This Web-Phone has no liked DID.
-            hr
-            #status-message-list
-          .col-md-6
-            h6 Call this phone from:
             .call-sip
-              p Internal SIP: &nbsp; sip:#{voxbone_webrtc_username}+{{user.browserUsername}}@workshop-gateway.voxbone.com
-              if dids
-                br
-                p From the PSTN: #{dids[0].did_number}
+              p Or use &nbsp;
+                span sip:#{voxbone_webrtc_username}+{{user.browserUsername}}@workshop-gateway.voxbone.com
             .img-container
               #microphone.int-sensor(ng-show="callState == 'ongoing'")
                 #mic1.sensor.sensor-01
