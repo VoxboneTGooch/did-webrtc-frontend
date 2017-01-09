@@ -84,11 +84,11 @@ define(['jquery', 'bootstrap'], function(jQuery) {
     }
 
     function setMicDot(dot) {
-      jQuery('#microphone #mic' + dot).addClass('active');
+      jQuery('#phone-microphone #mic' + dot).addClass('active');
     }
 
     function setEapDot(dot) {
-      jQuery('#earphone #eap' + dot).addClass('active');
+      jQuery('#phone-earphone #eap' + dot).addClass('active');
     }
 
     function filterRegistrarURI (registrarURI) {
@@ -170,14 +170,14 @@ define(['jquery', 'bootstrap'], function(jQuery) {
       };
 
       voxbone.WebRTC.customEventHandler.remoteMediaVolume = function(e) {
-        clearDevice('earphone');
+        clearDevice('phone-earphone');
         if (e.remoteVolume > 0.01) setEapDot('1');
         if (e.remoteVolume > 0.10) setEapDot('2');
         if (e.remoteVolume > 0.20) setEapDot('3');
       };
 
       voxbone.WebRTC.customEventHandler.localMediaVolume = function(e) {
-        clearDevice('microphone');
+        clearDevice('phone-microphone');
         if (e.localVolume > 0.01) setMicDot('1');
         if (e.localVolume > 0.10) setMicDot('2');
         if (e.localVolume > 0.20) setMicDot('3');
