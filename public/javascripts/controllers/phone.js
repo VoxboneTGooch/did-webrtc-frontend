@@ -23,17 +23,20 @@ define(['jquery', 'bootstrap'], function(jQuery) {
     appendMessage('time', 'Waiting for Registration');
 
     function appendMessage(icon, message) {
-      jQuery("#status-message-list").children().last().addClass('disabled');
-      jQuery("#status-message-list")
-      .append('<div class="call-info">\
-                <span class="glyphicon glyphicon-' + icon + '"></span>\
-                 ' + message + '\
-              </div>');
-      var elem = document.getElementById('status-message-list');
 
-      if (elem)
-        elem.scrollTop = elem.scrollHeight;
+      if (jQuery("#status-message-list").size() > 0) {
+        jQuery("#status-message-list").children().last().addClass('disabled');
+        jQuery("#status-message-list")
+        .append('<div class="call-info">\
+                  <span class="glyphicon glyphicon-' + icon + '"></span>\
+                   ' + message + '\
+                </div>');
+        var elem = document.getElementById('status-message-list');
 
+        if (elem)
+          elem.scrollTop = elem.scrollHeight;
+
+      }
     }
 
     var reqHeaders = {

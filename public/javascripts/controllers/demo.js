@@ -14,7 +14,9 @@ define([
 
         if (original.apply){
           // Firefox/Chrome
-          jQuery('#console').append(arguments[0].replace(/%c/g, '') + '<br>');
+          if (jQuery("#console").size() > 0)
+            jQuery('#console').append(arguments[0].replace(/%c/g, '') + '<br>');
+
           original.apply(console, arguments);
         }else{
           // IE
