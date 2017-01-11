@@ -17,7 +17,7 @@ append head
 
 block content
   .site-wrapper-inner.home-wrap
-    .container(ng-controller="PhoneController" ng-init=`init("${vox_username}", "${vox_password}", "${ringtone}")`)
+    .container(ng-controller="PhoneController" ng-init=`init(${JSON.stringify(config)}, "${ringtone}", "${email}")`)
       .call-page-content.ng-cloak.col-md-12
         .row
           .col-md-6
@@ -35,7 +35,7 @@ block content
                   span This Web-Phone has no liked DID.
             .call-sip
               p Or use &nbsp;
-                span sip:#{voxbone_webrtc_username}+{{user.browserUsername}}@workshop-gateway.voxbone.com
+                span sip:#{config.voxbone_webrtc_username}+{{user.browserUsername}}@workshop-gateway.voxbone.com
             .img-container
               #phone-microphone.phone-int-sensor(ng-show="callState == 'ongoing'")
                 #mic1.sensor.sensor-01

@@ -73,17 +73,24 @@ router.get('/edit-notifications', utils.isLoggedIn, function (req, res, next) {
 router.get('/phone', utils.isLoggedIn, function (req, res, next) {
   var ringtone = res.locals.currentUser.ringtone;
   var userDid = null;
+  var uemail = res.locals.currentUser.email;
 
   if (res.locals.currentUser.dids.length)
     userDid = res.locals.currentUser.dids;
 
   voxrtc_config = voxbone.generate();
-  vox_username = voxrtc_username;
-  vox_password = voxrtc_secret;
+  var config = {
+    vox_username: voxrtc_username,
+    vox_password: voxrtc_secret,
+    voxbone_webrtc_username: voxrtc_username,
+    apiBrowserName: res.locals.currentUser.apiBrowsername
+  };
+
   res.render('phone', {
     dids: userDid,
-    voxbone_webrtc_username: voxrtc_username,
-    ringtone: ringtone
+    config: config,
+    ringtone: ringtone,
+    email: uemail
   });
 });
 
@@ -101,15 +108,20 @@ router.get('/demo', function (req, res, next) {
         if (err) throw err;
       });
       voxrtc_config = voxbone.generate();
-      vox_username = voxrtc_username;
-      vox_password = voxrtc_secret;
-      res.render('demo', {
+      var config = {
+        vox_username: voxrtc_username,
+        vox_password: voxrtc_secret,
         voxbone_webrtc_username: voxrtc_username,
-        apiBrowsername: theDemo.name,
+        apiBrowserName: theDemo.name
+      };
+
+      res.render('demo', {
+        config: config,
         ringtone: 'office',
         widget_id: theDemo.widget_id,
         internal_sip: theDemo.sip,
-        dids: theDemo.dids
+        dids: theDemo.dids,
+        email: theDemo.name + '@did2webrtcdemo.com'
       });
   });
 });

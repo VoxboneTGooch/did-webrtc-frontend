@@ -17,7 +17,7 @@ append head
 
 block content
   .site-wrapper-inner.home-wrap.demo-page
-    .container(ng-controller="DemoController" ng-init=`init("${vox_username}", "${vox_password}", "${ringtone}", "${apiBrowsername}")`)
+    .container(ng-controller="DemoController" ng-init=`init(${JSON.stringify(config)}, "${ringtone}", "${email}")`)
       .row
         .ng-cloak.col-md-12
           .row
