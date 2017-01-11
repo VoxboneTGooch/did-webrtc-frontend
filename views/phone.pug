@@ -1,7 +1,7 @@
 extends layout
 
 prepend head
-  script(src="//rawgit.com/voxbone-workshop/webrtc-js/inbound/dist/voxbone-2.2.0-alpha.js")
+  script(src=process.env.VOXBONE_JS_LIB_URL)
   link(rel="stylesheet" href="/lib/flag-icon-css/css/flag-icon.min.css")
 append head
   script.
