@@ -113,16 +113,32 @@ block content
 
           .col-md-4.newsletter
             h3 Stay in touch
-            form
+            form#newsletterForm
               .form-group
-                label(for="exampleInputName2") Name
-                input.form-control(id="exampleInputName2" placeholder="Name" type="text")
+                label(for="name") Name
+                input.form-control(id="uname" placeholder="Name" type="text")
+                span.error-msg.name-invalid.hidden Please enter a proper name
               .form-group
-                label(for="exampleInputEmail4") Email
-                input.form-control(id="exampleInputEmail4" placeholder="email@example.com" type="email")
-              button.btn.btn-default(type="submit") Sign up for Newsletter
+                label(for="email") Email
+                input.form-control(id="uemail" placeholder="email@example.com" type="email")
+                span.error-msg.email-invalid.hidden Please enter a proper email address
+              button#newsletterSignUp.btn.btn-default(type="submit") Sign up for Newsletter
 
     .footer
-      p #[a(target="_blank" href="https://www.voxbone.com/acceptable-use-policy") Acceptable Use Policy] | #[a(target="_blank" href="https://www.voxbone.com/privacy-policy") Privacy Policy] | #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Voxbone did2webr.tc Feedback") Send Feedback] | #[a(target="_blank" href="https://workshop.voxbone.com") A Workshop Project] | #[a(target="_blank" href="https://www.voxbone.com/" style="border-right: 0px;") Copyright ©2016, VOXBONE SA]
+      p #[a(target="_blank" href="https://www.voxbone.com/acceptable-use-policy") Acceptable Use Policy] | #[a(target="_blank" href="https://www.voxbone.com/privacy-policy") Privacy Policy] | #[a(target="_blank" href="mailto:workshop@voxbone.com?subject=Voxbone did2webr.tc Feedback") Send Feedback] | #[a(target="_blank" href="https://workshop.voxbone.com") A Workshop Project] | #[a(target="_blank" href="https://www.voxbone.com/" style="border-right: 0px;") Copyright ©2017, VOXBONE SA]
+
+  //- <!-- Newsletter Modal -->
+  #newsletterModal.modal.fade(role="dialog")
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button(type="button" class="close" data-dismiss="modal")
+          h4#myModalLabel.modal-title.pull-left
+            i.glyphicon.glyphicon-exclamation-sign
+              span Newsletter
+        .modal-body
+          p#subscription-message Placeholder
+        .modal-footer
+          button(type="button" class="btn btn-primary btn-lg" data-dismiss="modal") Dismiss
 
   #voxButton_575b3d7e89005411004db935.voxButton(data-button_id='575b3d7e89005411004db935' data-text='click2vox Us Now' data-redirect_url='https://voxbone.com' data-did='883510080408' data-dial_pad='true' data-context='' data-send_digits='' data-caller_id='Click2Vox_did2webrtc' data-incompatible_browser_configuration='hide_widget' data-show_frame='false' data-show_branding='false' data-use_default_button_css='false' data-div_css_class_name='hidden' data-test_setup='false' data-button_css_class_name='btn btn-purple')
