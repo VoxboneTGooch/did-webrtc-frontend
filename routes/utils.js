@@ -2,6 +2,8 @@ var _ = require('lodash');
 var Haikunator = require('haikunator');
 var haikunator = new Haikunator();
 var isoCountries = require("i18n-iso-countries");
+var UAParser = require('ua-parser-js');
+var parser = new UAParser();
 
 // Here it goes only utility methods
 module.exports = {
@@ -148,6 +150,21 @@ module.exports = {
       }
       callback(result);
     });
+  },
+
+  getUnsupportedBrowsers: function() {
+    return ['IE', 'Safari'];
+  },
+
+  isSupportedBrowser: function(req) {
+    var ua = req.headers['user-agent'];
+    var browserName = parser.setUA(ua).getBrowser().name;
+    return this.getUnsupportedBrowsers().indexOf(browserName) === -1;
+  },
+
+  getReqBrowser: function(req) {
+    var ua = req.headers['user-agent'];
+    return parser.setUA(ua).getBrowser().name;
   },
 
   getVoxRoutes: function() {

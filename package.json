@@ -50,6 +50,7 @@
     "sendgrid": "^2.0.0",
     "serve-favicon": "~2.3.0",
     "strong-params": "^0.7.0",
+    "ua-parser-js": "latest",
     "underscore": "latest",
     "voxbone-webrtc": "~0.0.8"
   },

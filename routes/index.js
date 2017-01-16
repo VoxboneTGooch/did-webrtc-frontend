@@ -42,8 +42,13 @@ router.get('/.well-known/acme-challenge/:acmeToken', function(req, res, next) {
   else res.status(404).send();
 });
 
-// Redirects if not HTTPS
 router.get('*', function (req, res, next) {
+  //  Check for unsupported browsers
+  if (!utils.isSupportedBrowser(req) && req.url !== '/') {
+    res.redirect('/');
+    return;
+  }
+  // Redirects if not HTTPS
   if (process.env.FORCE_HTTPS == 'true' && process.env.APP_URL && req.headers['x-forwarded-proto'] != 'https')
     res.redirect(process.env.APP_URL + req.url);
   else
@@ -51,7 +56,12 @@ router.get('*', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-  res.render('home');
+  var unsupported_browser = null;
+
+  if (!utils.isSupportedBrowser(req))
+    unsupported_browser = utils.getReqBrowser(req);
+
+  res.render('home', {unsupported_browser: unsupported_browser});
 });
 
 router.get('/ping', function (req, res, next) {

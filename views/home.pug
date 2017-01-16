@@ -19,7 +19,9 @@ block content
     .container
       .row.banner-content
         .col-sm-12.col-md-8
-
+          if unsupported_browser
+            .unsupported-browser.text-center.banner-content
+              h4 #{unsupported_browser} is not supported, please use Firefox or Chrome
           h1 Webphone for everyone
           h2 Answer phone calls from your browser!
           p Choose a phone number and answer calls from your browser. One minute configuration, no installs, no plug-ins, no hassle. did2webr.tc is a cloud-based service based on the Voxbone Workshop WebRTC Gateway Service. Click-to-answer with did2webr.tc is perfect for:
