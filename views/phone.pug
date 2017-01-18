@@ -17,7 +17,7 @@ append head
 
 block content
   .site-wrapper-inner.home-wrap
-    .container(ng-controller="PhoneController" ng-init=`init(${JSON.stringify(config)}, "${ringtone}", "${browserNotifications}", "${email}")`)
+    .container(ng-controller="PhoneController" ng-init=`init(${JSON.stringify(config)}, "${ringtone}", "${email}", "${browserNotifications}")`)
       .call-page-content.ng-cloak.col-md-12
         .row
           .col-md-6
@@ -37,23 +37,23 @@ block content
               p Or use &nbsp;
                 span sip:#{config.voxbone_webrtc_username}+{{user.browserUsername}}@workshop-gateway.voxbone.com
             .img-container
-              #phone-microphone.phone-int-sensor(ng-show="callState == 'ongoing'")
+              #phone-microphone.phone-int-sensor(ng-show="isCallOngoing()")
                 #mic1.sensor.sensor-01
                 #mic2.sensor.sensor-02
                 #mic3.sensor.sensor-03
-              #phone-earphone.phone-int-sensor(ng-show="callState == 'ongoing'")
+              #phone-earphone.phone-int-sensor(ng-show="isCallOngoing()")
                 #eap1.sensor.sensor-01
                 #eap2.sensor.sensor-02
                 #eap3.sensor.sensor-03
-              img(ng-src="{{phoneImg}}")
+              img(ng-src="{{getPhoneImage()}}")
               .call-actions
-                button.btn.btn-answer.call-button(ng-disabled="callState !== 'receiving'" ng-show="callState !== 'ongoing'" ng-click="answerCall()")
+                button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving()" ng-show="!isCallOngoing()" ng-click="answerCall()")
                   span.glyphicon.glyphicon-ok
                   | Answer
-                button.btn.btn-decline.call-button(ng-show="callState == 'receiving'" ng-click="declineCall()")
+                button.btn.btn-decline.call-button(ng-show="isCallReceiving()" ng-click="declineCall()")
                   span.glyphicon.glyphicon-earphone
                   | Decline
-                button.btn.btn-hangup.call-button(ng-show="callState == 'ongoing'" ng-click="hangCall()")
+                button.btn.btn-hangup.call-button(ng-show="isCallOngoing()" ng-click="hangCall()")
                   span.glyphicon.glyphicon-earphone
                   | Hang up
             .text-center.trouble-connecting

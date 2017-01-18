@@ -55,17 +55,17 @@ block content
                   #status-message-list
                 .col-md-6
                   .img-container
-                    #microphone.int-sensor(ng-show="callState == 'ongoing'")
-                    #earphone.int-sensor(ng-show="callState == 'ongoing'")
-                    img(ng-src="{{phoneImg}}")
+                    #microphone.int-sensor(ng-show="isCallOngoing()")
+                    #earphone.int-sensor(ng-show="isCallOngoing()")
+                    img(ng-src="{{getPhoneImage()}}")
                     .call-actions
-                      button.btn.btn-answer.call-button(ng-disabled="callState !== 'receiving'" ng-show="callState !== 'ongoing'" ng-click="answerCall()")
+                      button.btn.btn-answer.call-button(ng-disabled="callState !== 'receiving'" ng-show="!isCallOngoing()" ng-click="answerCall()")
                         span.glyphicon.glyphicon-ok
                         | Answer
-                      button.btn.btn-decline.call-button(ng-show="callState == 'receiving'" ng-click="declineCall()")
+                      button.btn.btn-decline.call-button(ng-show="isCallReceiving()" ng-click="declineCall()")
                         span.glyphicon.glyphicon-earphone
                         | Decline
-                      button.btn.btn-hangup.call-button(ng-show="callState == 'ongoing'" ng-click="hangCall()")
+                      button.btn.btn-hangup.call-button(ng-show="isCallOngoing()" ng-click="hangCall()")
                         span.glyphicon.glyphicon-earphone
                         | Hang up
                   .text-center.trouble-connecting

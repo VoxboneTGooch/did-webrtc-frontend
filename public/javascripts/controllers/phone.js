@@ -110,10 +110,24 @@ define([
       return registrarURI.substring(sipIndex).substring(0, portIndex).trim();
     }
 
-    $scope.init = function (config, ringtone, browserNotifications, email) {
+    $scope.isCallOngoing = function() {
+      return angular.equals($scope.callState, 'ongoing');
+    };
+
+    $scope.isCallReceiving = function() {
+      return angular.equals($scope.callState, 'receiving');
+    };
+
+    $scope.getPhoneImage = function() {
+      return $scope.phoneImg;
+    };
+
+    $scope.init = function (config, ringtone, email, browserNotifications) {
       var req_url;
       var now;
-      $scope.browserNotifications = JSON.parse(browserNotifications);
+
+      if (browserNotifications)
+        $scope.browserNotifications = JSON.parse(browserNotifications);
 
       if (config.apiBrowserName)
         req_url = '/api/userInfo?apiBrowserName=' + config.apiBrowserName;
