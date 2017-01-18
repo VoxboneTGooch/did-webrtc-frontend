@@ -17,7 +17,7 @@ append head
 
 block content
   .site-wrapper-inner.home-wrap
-    .container(ng-controller="PhoneController" ng-init=`init(${JSON.stringify(config)}, "${ringtone}", "${email}")`)
+    .container(ng-controller="PhoneController" ng-init=`init(${JSON.stringify(config)}, "${ringtone}", "${browserNotifications}", "${email}")`)
       .call-page-content.ng-cloak.col-md-12
         .row
           .col-md-6

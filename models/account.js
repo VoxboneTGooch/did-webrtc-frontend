@@ -63,6 +63,10 @@ var accountSchema = new Schema({
     type: String,
     default: "office"
   },
+  browserNotifications: {
+    type: Boolean,
+    default: false
+  },
   dids: {
     type: [Schema.Types.Mixed],
     default: []

@@ -82,6 +82,7 @@ router.get('/edit-notifications', utils.isLoggedIn, function (req, res, next) {
 
 router.get('/phone', utils.isLoggedIn, function (req, res, next) {
   var ringtone = res.locals.currentUser.ringtone;
+  var browserNotifications = res.locals.currentUser.browserNotifications;
   var userDid = null;
   var uemail = res.locals.currentUser.email;
 
@@ -100,6 +101,7 @@ router.get('/phone', utils.isLoggedIn, function (req, res, next) {
     dids: userDid,
     config: config,
     ringtone: ringtone,
+    browserNotifications: browserNotifications,
     email: uemail
   });
 });

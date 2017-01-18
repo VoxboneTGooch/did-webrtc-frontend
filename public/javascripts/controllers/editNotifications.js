@@ -1,7 +1,11 @@
-define(['jquery', 'bootstrap'], function(jQuery) {
+define([
+  'controllers/browserNotifications',
+  'jquery',
+  'bootstrap'
+  ], function(BrowserNotificationsController, jQuery) {
 
-  var EditNotificationsController = function($scope, $http, $window, $timeout) {
-
+  var EditNotificationsController = function($scope, $http, $window, $timeout, $controller) {
+    angular.extend(this, $controller(BrowserNotificationsController, {$scope: $scope}));
     $scope.playing = false;
     $scope.savedSuccessfully = false;
     $scope.saveButtonText = 'Save Changes';
@@ -63,7 +67,7 @@ define(['jquery', 'bootstrap'], function(jQuery) {
     };
 
   };
-  EditNotificationsController.$inject = ['$scope', '$http', '$window', '$timeout'];
+  EditNotificationsController.$inject = ['$scope', '$http', '$window', '$timeout', '$controller'];
 
   return EditNotificationsController;
 });

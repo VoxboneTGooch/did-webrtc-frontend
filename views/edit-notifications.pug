@@ -36,9 +36,9 @@ block content
 
           .checkbox
             label
-              input(type="checkbox" disabled)
+              input(type="checkbox" ng-click="showNotificationStatus()" ng-model="account.browserNotifications")
               |Browser Notification &nbsp;
-              span.badge(data-toggle='tooltip' data-placement="right" title="Enable pop-up notifications to from your browser") ?
+              span.badge(data-toggle='tooltip' data-placement="right" title="Enable pop-up notifications from your browser") ?
 
         .col-xs-12
           .form-group
@@ -52,7 +52,7 @@ block content
           .form-group
             label SMS &nbsp;
               span.badge(data-toggle='tooltip' data-placement="right" title="Enter a phone number for SMS alerts on incoming calls") ?
-            input(type="text" class="form-control" value="Coming soon.." disabled)
+            input(type="text" class="form-control" value="Coming soon..." disabled)
 
           .form-group(ng-cloak)
             button.btn.btn-default-custom.pull-right.button-block(ng-click="saveNotifications()" name="skipBtn") {{ saveButtonText }}
