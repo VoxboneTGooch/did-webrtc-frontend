@@ -100,7 +100,7 @@ module.exports = {
     var request = require('request');
     var utils = this;
     var url = process.env.VOXBONE_PROVISIONING_API_URL + '/configuration/voiceuri';
-    var sipUri = process.env.VOXBONE_WEBRTC_USERNAME + "+" + browserUsername + "@workshop-gateway.voxbone.com";
+    var sipUri = process.env.VOXBONE_WEBRTC_USERNAME + "+" + browserUsername + "@sip.2webr.tc";
     var data = {
       "voiceUri": {
         "voiceUriId": null,
