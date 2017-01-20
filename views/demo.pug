@@ -59,7 +59,7 @@ block content
                     #earphone.int-sensor(ng-show="isCallOngoing()")
                     img(ng-src="{{getPhoneImage()}}")
                     .call-actions
-                      button.btn.btn-answer.call-button(ng-disabled="callState !== 'receiving'" ng-show="!isCallOngoing()" ng-click="answerCall()")
+                      button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving()" ng-show="!isCallOngoing()" ng-click="answerCall()")
                         span.glyphicon.glyphicon-ok
                         | Answer
                       button.btn.btn-decline.call-button(ng-show="isCallReceiving()" ng-click="declineCall()")
