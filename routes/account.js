@@ -112,7 +112,7 @@ router.get('/signup', recaptcha.middleware.render, function (req, res, next) {
     temp_password: req.query.password,
     captcha: req.recaptcha,
     conference_name: conference,
-    reference: req.param('ref')
+    reference: req.params.ref
   });
 });
 
