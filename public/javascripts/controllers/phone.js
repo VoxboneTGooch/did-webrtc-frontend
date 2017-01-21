@@ -13,10 +13,13 @@ define([
       video: false,
       audio: true,
     };
+
+    $scope.gumPermission = false;
     navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 
     if (navigator.getUserMedia) {
       navigator.getUserMedia(constraints, function() {
+        $scope.gumPermission = true;
         appendMessage('ok', 'Microphone access granted');
       }, function(){
         appendMessage('remove', 'Could not access microphone');

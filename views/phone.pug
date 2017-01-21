@@ -25,6 +25,8 @@ block content
             #status-message-list
           .col-md-6
             h4 Your phone
+            .mic-warning.text-center(ng-show="!gumPermission && isCallReceiving()")
+              p We couldn't access your Microphone. You won't be able to pick the call. Please check your browser settings and try again.
             .well.bridge-number
               .text-center
                 if dids
@@ -47,7 +49,7 @@ block content
                 #eap3.sensor.sensor-03
               img(ng-src="{{getPhoneImage()}}")
               .call-actions
-                button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving()" ng-show="!isCallOngoing()" ng-click="answerCall()")
+                button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving() || !gumPermission" ng-show="!isCallOngoing()" ng-click="answerCall()")
                   span.glyphicon.glyphicon-ok
                   | Answer
                 button.btn.btn-decline.call-button(ng-show="isCallReceiving()" ng-click="declineCall()")

@@ -51,6 +51,8 @@ block content
             .col-md-6
               .call-page-content.panel
                 h4 Click-to-answer your call
+                .mic-warning.text-center(ng-show="!gumPermission && isCallReceiving()")
+                  p We couldn't access your Microphone. You won't be able to pick the call. Please check your browser settings and try again.
                 .col-md-6
                   #status-message-list
                 .col-md-6
@@ -59,7 +61,7 @@ block content
                     #earphone.int-sensor(ng-show="isCallOngoing()")
                     img(ng-src="{{getPhoneImage()}}")
                     .call-actions
-                      button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving()" ng-show="!isCallOngoing()" ng-click="answerCall()")
+                      button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving() || !gumPermission" ng-show="!isCallOngoing()" ng-click="answerCall()")
                         span.glyphicon.glyphicon-ok
                         | Answer
                       button.btn.btn-decline.call-button(ng-show="isCallReceiving()" ng-click="declineCall()")
