@@ -156,22 +156,22 @@ module.exports = {
     return ['IE', 'Safari'];
   },
 
-  isSupportedBrowser: function(req) {
-    var ua = req.headers['user-agent'];
-    var browserName = parser.setUA(ua).getBrowser().name;
-    var length = this.getUnsupportedBrowsers().length;
-
+  isSupportedBrowser: function(browserName) {
     /*Checking for any appearance of the words safari or ie in the browser name.
     there are scenarios like Mobile Safari for example which should be marked as
     non supported browser even though there's not an exact match*/
-    while (length--) {
 
-      if (browserName.toLowerCase().indexOf(this.getUnsupportedBrowsers()[length].toLowerCase()) !== -1)
-        return false;
+    if (!browserName) return false;
 
-    }
+    var result = true;
 
-    return true;
+    browserName = browserName.toLowerCase();
+    this.getUnsupportedBrowsers().forEach(function (unsupportedBrowser) {
+      if (browserName.indexOf(unsupportedBrowser.toLowerCase()) !== -1)
+        result = false;
+    });
+
+    return result;
   },
 
   getReqBrowser: function(req) {

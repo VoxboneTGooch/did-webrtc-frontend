@@ -60,4 +60,28 @@ describe('Utils module', function() {
     });
   });
 
+  describe('#getUnsupportedBrowsers()', function() {
+    var unsupportedBrowsers = utils.getUnsupportedBrowsers();
+
+    it('should return the list of unsupported browsers', function() {
+      var expectedArray = ['IE', 'Safari'];
+      expect(unsupportedBrowsers).to.be.an('Array');
+      expect(unsupportedBrowsers).be.eql(expectedArray);
+    });
+  });
+
+  describe('#isSupportedBrowser()', function() {
+    it('should detect an supported browser', function() {
+      ['Chrome', 'Mobile Chrome', 'Firefox', 'Opera'].forEach(function (x) {
+        expect(utils.isSupportedBrowser(x)).be.eql(true);
+      });
+    });
+
+    it('should detect an unsupported browser', function() {
+      ['Safari', 'Mobile Safari', 'IE', '', null].forEach(function (x) {
+        expect(utils.isSupportedBrowser(x)).be.eql(false);
+      });
+    });
+  });
+
 });
