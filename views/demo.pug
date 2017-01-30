@@ -57,8 +57,14 @@ block content
                   #status-message-list
                 .col-md-6
                   .img-container
-                    #microphone.int-sensor(ng-show="isCallOngoing()")
-                    #earphone.int-sensor(ng-show="isCallOngoing()")
+                    #phone-microphone.phone-int-sensor(ng-show="isCallOngoing()")
+                      #mic1.sensor.sensor-01
+                      #mic2.sensor.sensor-02
+                      #mic3.sensor.sensor-03
+                    #phone-earphone.phone-int-sensor(ng-show="isCallOngoing()")
+                      #eap1.sensor.sensor-01
+                      #eap2.sensor.sensor-02
+                      #eap3.sensor.sensor-03
                     img(ng-src="{{getPhoneImage()}}")
                     .call-actions
                       button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving() || !gumPermission" ng-show="!isCallOngoing()" ng-click="answerCall()")
