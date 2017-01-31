@@ -34,7 +34,7 @@ Account.findOne({email: "demo.user@did2webr.tc"}, function (err, demoAccount) {
 
 function generateDemos (index) {
   Demo.findOne({name: "demo" + index}, function (err, demo) {
-    var internalSip = process.env.VOXBONE_WEBRTC_USERNAME + "+demo" + index + "@sip.2webr.tc";
+    var internalSip = process.env.VOXBONE_WEBRTC_USERNAME + "+demo" + index + "@" + process.env.SIP_GATEWAY_DOMAIN;
     var options = {
       url: 'https://click2vox.com/widget/get-id?sipuri=' + encodeURIComponent(internalSip),
       method: 'GET',

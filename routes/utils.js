@@ -100,7 +100,7 @@ module.exports = {
     var request = require('request');
     var utils = this;
     var url = process.env.VOXBONE_PROVISIONING_API_URL + '/configuration/voiceuri';
-    var sipUri = process.env.VOXBONE_WEBRTC_USERNAME + "+" + browserUsername + "@sip.2webr.tc";
+    var sipUri = process.env.VOXBONE_WEBRTC_USERNAME + "+" + browserUsername + "@" + process.env.SIP_GATEWAY_DOMAIN;
     var data = {
       "voiceUri": {
         "voiceUriId": null,

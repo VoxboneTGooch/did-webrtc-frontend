@@ -96,7 +96,9 @@ router.get('/phone', utils.isLoggedIn, function (req, res, next) {
     vox_username: voxrtc_username,
     vox_password: voxrtc_secret,
     voxbone_webrtc_username: voxrtc_username,
-    apiBrowserName: res.locals.currentUser.apiBrowsername
+    apiBrowserName: res.locals.currentUser.apiBrowsername,
+    ws_server: process.env.WS_SERVER,
+    sip_gateway_domain: process.env.SIP_GATEWAY_DOMAIN
   };
 
   res.render('phone', {
@@ -126,7 +128,9 @@ router.get('/demo', function (req, res, next) {
         vox_username: voxrtc_username,
         vox_password: voxrtc_secret,
         voxbone_webrtc_username: voxrtc_username,
-        apiBrowserName: theDemo.name
+        apiBrowserName: theDemo.name,
+        ws_server: process.env.WS_SERVER,
+        sip_gateway_domain: process.env.SIP_GATEWAY_DOMAIN
       };
 
       res.render('demo', {
@@ -135,7 +139,7 @@ router.get('/demo', function (req, res, next) {
         widget_id: theDemo.widget_id,
         internal_sip: theDemo.sip,
         dids: theDemo.dids,
-        email: theDemo.name + '@did2webrtcdemo.com'
+        email: theDemo.name + '@' + process.env.SIP_GATEWAY_DOMAIN
       });
   });
 });

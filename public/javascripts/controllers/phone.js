@@ -151,8 +151,8 @@ define([
         voxbone.WebRTC.configuration.log_level = voxbone.Logger.log_level.INFO;
         voxbone.WebRTC.username = $scope.user.sipUsername;
         voxbone.WebRTC.password = $scope.user.sipPassword;
-        voxbone.WebRTC.configuration.uri = 'sip:' + $scope.user.browserUsername + '@sip.2webr.tc';
-        voxbone.WebRTC.configuration.ws_servers = ['wss://sip.2webr.tc'];
+        voxbone.WebRTC.configuration.uri = 'sip:' + $scope.user.browserUsername + '@' + config.sip_gateway_domain;
+        voxbone.WebRTC.configuration.ws_servers = [config.ws_server];
 
         //exporting call logs
         voxbone.WebRTC.configuration.post_logs = true;

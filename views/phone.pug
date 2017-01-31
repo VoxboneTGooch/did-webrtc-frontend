@@ -37,7 +37,7 @@ block content
                   span This Web-Phone has no liked DID.
             .call-sip
               p Or use &nbsp;
-                span sip:#{config.voxbone_webrtc_username}+{{user.browserUsername}}@sip.2webr.tc
+                span sip:#{config.voxbone_webrtc_username}+{{user.browserUsername}}@#{config.sip_gateway_domain}
             .img-container
               #phone-microphone.phone-int-sensor(ng-show="isCallOngoing()")
                 #mic1.sensor.sensor-01
