@@ -38,7 +38,7 @@ block content
             .call-sip
               p Or use &nbsp;
                 span sip:#{config.voxbone_webrtc_username}+{{user.browserUsername}}@#{config.sip_gateway_domain}
-            .img-container
+            .img-container.ng-cloak
               #phone-microphone.phone-int-sensor(ng-show="isCallOngoing()")
                 #mic1.sensor.sensor-01
                 #mic2.sensor.sensor-02

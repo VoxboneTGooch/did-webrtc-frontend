@@ -1,61 +1,27 @@
 define([
   'controllers/browserNotifications',
-  'jquery',
   'bootstrap'
-  ], function(BrowserNotificationsController, jQuery) {
+  ], function(BrowserNotificationsController) {
 
   var PhoneController = function($scope, $http, $window, $timeout, $controller) {
     angular.extend(this, $controller(BrowserNotificationsController, {$scope: $scope}));
     $scope.callState = 'initial';
     $scope.phoneImg = '/images/vox-static-phone.png';
     var audio;
-    var constraints = {
-      video: false,
-      audio: true,
-    };
-
-    $scope.gumPermission = false;
-    navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
-
-    if (navigator.getUserMedia) {
-      navigator.getUserMedia(constraints, function() {
-        $scope.gumPermission = true;
-        appendMessage('ok', 'Microphone access granted');
-      }, function(){
-        appendMessage('remove', 'Could not access microphone');
-      });
-    } else {
-      appendMessage('remove', 'Your browser does not support accessing your microphone, please try again in either Chrome, Firefox or Opera');
-    }
-
-    appendMessage('time', 'Waiting for Registration');
 
     function appendMessage(icon, message) {
+      var elem = document.getElementById("status-message-list");
 
-      if (jQuery("#status-message-list").size() > 0) {
-        jQuery("#status-message-list").children().last().addClass('disabled');
-        jQuery("#status-message-list")
-        .append('<div class="call-info">\
-                  <span class="glyphicon glyphicon-' + icon + '"></span>\
-                   ' + message + '\
-                </div>');
-        var elem = document.getElementById('status-message-list');
+      if (!elem) return;
 
-        if (elem)
-          elem.scrollTop = elem.scrollHeight;
+      elem
+      .innerHTML += '<div class="call-info">\
+                <span class="glyphicon glyphicon-' + icon + '"></span>\
+                 ' + message + '\
+              </div>';
 
-      }
+      elem.scrollTop = elem.scrollHeight;
     }
-
-    var reqHeaders = {
-      'Content-Type': 'application/json; charset=utf-8'
-    };
-
-    var get_req = {
-      method: 'GET',
-      url: '/api/userInfo',
-      headers: reqHeaders
-    };
 
     function setState(state, callee) {
 
@@ -80,8 +46,6 @@ define([
           $scope.callState = 'ongoing';
           $scope.phoneImg = '/images/vox-hand-phone.png';
           break;
-        default:
-          alert("default");
       }
 
       if(!$scope.$$phase)
@@ -90,17 +54,18 @@ define([
     }
 
     function clearDevice(device){
-      jQuery('.img-container #' + device +' div').each(function(){
-        jQuery(this).removeClass('active');
+      var micDots = document.querySelectorAll('.img-container #' + device +' div');
+      Array.prototype.forEach.call(micDots, function(el, i) {
+        el.classList.remove('active');
       });
     }
 
     function setMicDot(dot) {
-      jQuery('#phone-microphone #mic' + dot).addClass('active');
+      document.querySelector('#phone-microphone #mic' + dot).classList.add('active');
     }
 
     function setEapDot(dot) {
-      jQuery('#phone-earphone #eap' + dot).addClass('active');
+      document.querySelector('#phone-earphone #eap' + dot).classList.add('active');
     }
 
     function filterRegistrarURI (registrarURI) {
@@ -128,6 +93,26 @@ define([
     $scope.init = function (config, ringtone, email, browserNotifications) {
       var req_url;
       var now;
+      var constraints = {
+        video: false,
+        audio: true,
+      };
+
+      $scope.gumPermission = false;
+      navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+
+      if (navigator.getUserMedia) {
+        navigator.getUserMedia(constraints, function() {
+          $scope.gumPermission = true;
+          appendMessage('ok', 'Microphone access granted');
+        }, function(){
+          appendMessage('remove', 'Could not access microphone');
+        });
+      } else {
+        appendMessage('remove', 'Your browser does not support accessing your microphone, please try again in either Chrome, Firefox or Opera');
+      }
+
+      appendMessage('time', 'Waiting for Registration');
 
       if (browserNotifications)
         $scope.browserNotifications = JSON.parse(browserNotifications);
@@ -137,6 +122,9 @@ define([
       else
         req_url = '/api/userInfo';
 
+      var reqHeaders = {
+        'Content-Type': 'application/json; charset=utf-8'
+      };
       var get_req = {
         method: 'GET',
         url: req_url,
