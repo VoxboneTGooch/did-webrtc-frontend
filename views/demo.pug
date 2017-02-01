@@ -53,30 +53,31 @@ block content
                 h4 Click-to-answer your call
                 .mic-warning.text-center(ng-show="!gumPermission && isCallReceiving()")
                   p We couldn't access your Microphone. You won't be able to pick the call. Please check your browser settings and try again.
-                .col-md-6
-                  #status-message-list
-                .col-md-6
-                  .img-container.ng-cloak
-                    #phone-microphone.phone-int-sensor(ng-show="isCallOngoing()")
-                      #mic1.sensor.sensor-01
-                      #mic2.sensor.sensor-02
-                      #mic3.sensor.sensor-03
-                    #phone-earphone.phone-int-sensor(ng-show="isCallOngoing()")
-                      #eap1.sensor.sensor-01
-                      #eap2.sensor.sensor-02
-                      #eap3.sensor.sensor-03
-                    img(ng-src="{{getPhoneImage()}}")
-                    .call-actions
-                      button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving() || !gumPermission" ng-show="!isCallOngoing()" ng-click="answerCall()")
-                        span.glyphicon.glyphicon-ok
-                        | Answer
-                      button.btn.btn-decline.call-button(ng-show="isCallReceiving()" ng-click="declineCall()")
-                        span.glyphicon.glyphicon-earphone
-                        | Decline
-                      button.btn.btn-hangup.call-button(ng-show="isCallOngoing()" ng-click="hangCall()")
-                        span.glyphicon.glyphicon-earphone
-                        | Hang up
-                  .text-center.trouble-connecting
-                    span Trouble connecting? #[a.contact-link(target="_blank" href="mailto:workshop@voxbone.com?subject=did2webrtc connection help") Contact us]
+                .row
+                  .col-lg-12.col-xl-6
+                    #status-message-list
+                  .col-lg-12.col-xl-6
+                    .img-container.ng-cloak
+                      #phone-microphone.phone-int-sensor(ng-show="isCallOngoing()")
+                        #mic1.sensor.sensor-01
+                        #mic2.sensor.sensor-02
+                        #mic3.sensor.sensor-03
+                      #phone-earphone.phone-int-sensor(ng-show="isCallOngoing()")
+                        #eap1.sensor.sensor-01
+                        #eap2.sensor.sensor-02
+                        #eap3.sensor.sensor-03
+                      img(ng-src="{{getPhoneImage()}}")
+                      .call-actions
+                        button.btn.btn-answer.call-button(ng-disabled="!isCallReceiving() || !gumPermission" ng-show="!isCallOngoing()" ng-click="answerCall()")
+                          span.glyphicon.glyphicon-ok
+                          | Answer
+                        button.btn.btn-decline.call-button(ng-show="isCallReceiving()" ng-click="declineCall()")
+                          span.glyphicon.glyphicon-earphone
+                          | Decline
+                        button.btn.btn-hangup.call-button(ng-show="isCallOngoing()" ng-click="hangCall()")
+                          span.glyphicon.glyphicon-earphone
+                          | Hang up
+                    .text-center.trouble-connecting
+                      span Trouble connecting? #[a.contact-link(target="_blank" href="mailto:workshop@voxbone.com?subject=did2webrtc connection help") Contact us]
                 h4 Behind the scenes
                 #console
