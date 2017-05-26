@@ -30,7 +30,7 @@ module.exports = function (grunt) {
     },
     nodemon: {
       options: {
-        nodeArgs: ['--debug'],
+        nodeArgs: ['--inspect'],
       },
       dev: {
         script: './bin/www'
