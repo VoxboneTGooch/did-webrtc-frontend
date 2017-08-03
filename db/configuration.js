@@ -6,7 +6,11 @@ var Demo = require('../models/demo');
 var request = require('request');
 var utils = require('../routes/utils');
 
-mongoose.connect(dbURI);
+mongoose.Promise = global.Promise;
+
+var promise = mongoose.connect(dbURI, {
+  useMongoClient: true
+});
 
 //Check for demo user for testing purposes
 Account.findOne({email: "demo.user@did2webr.tc"}, function (err, demoAccount) {

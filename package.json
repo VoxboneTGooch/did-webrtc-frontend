@@ -1,6 +1,6 @@
 {
   "name": "did-webrtc-frontend",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -9,7 +9,7 @@
     "prepush": "npm test && grunt nightwatch"
   },
   "engines": {
-    "node": "^6.10.0"
+    "node": "^6.11.2"
   },
   "dependencies": {
     "async": "^1.5.0",
@@ -21,18 +21,14 @@
     "connect-timeout": "^1.7.0",
     "cookie-parser": "^1.4.3",
     "country-data": "0.0.30",
-    "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-recaptcha": "^2.1.0",
     "express-session": "^1.14.1",
-    "grunt": "^1.0.1",
-    "grunt-bower-requirejs": "^2.0.0",
-    "grunt-nodemon": "^0.4.2",
     "haikunator": "^2.0.0",
     "i18n-iso-countries": "1.6.0",
     "lodash": "^4.16.4",
     "moment": "^2.16.0",
-    "mongoose": "^4.6.4",
+    "mongoose": "^4.11.5",
     "morgan": "~1.6.1",
     "newrelic": "^1.32.0",
     "node-cache": "^4.1.0",
@@ -56,6 +52,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "debug": "~2.6.8",
     "grunt": "^1.0.1",
     "grunt-bower-requirejs": "^2.0.0",
     "grunt-bower-task": "^0.4.0",
@@ -66,6 +63,7 @@
     "grunt-contrib-uglify": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-nightwatch": "^0.5.3",
+    "grunt-nodemon": "^0.4.2",
     "grunt-simple-mocha": "^0.4.1",
     "husky": "^0.11.6",
     "jit-grunt": "^0.10.0",
