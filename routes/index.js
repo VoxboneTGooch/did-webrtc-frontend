@@ -98,7 +98,9 @@ router.get('/phone', utils.isLoggedIn, function (req, res, next) {
     voxbone_webrtc_username: voxrtc_username,
     apiBrowserName: res.locals.currentUser.apiBrowsername,
     ws_server: process.env.WS_SERVER,
-    sip_gateway_domain: process.env.SIP_GATEWAY_DOMAIN
+    sip_gateway_domain: process.env.SIP_GATEWAY_DOMAIN,
+    voxbone_js_lib: process.env.VOXBONE_JS_LIB_URL,
+    voxbone_janus_url: process.env.VOXBONE_JANUS_URL
   };
 
   res.render('phone', {
@@ -130,7 +132,9 @@ router.get('/demo', function (req, res, next) {
         voxbone_webrtc_username: voxrtc_username,
         apiBrowserName: theDemo.name,
         ws_server: process.env.WS_SERVER,
-        sip_gateway_domain: process.env.SIP_GATEWAY_DOMAIN
+        sip_gateway_domain: process.env.SIP_GATEWAY_DOMAIN,
+        voxbone_js_lib: process.env.VOXBONE_JS_LIB_URL,
+        voxbone_janus_url: process.env.VOXBONE_JANUS_URL
       };
 
       res.render('demo', {
