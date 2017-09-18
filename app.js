@@ -20,7 +20,6 @@ require('./config/auth/passport')(passport);
 var express = require('express');
 var timeout = require('connect-timeout');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 
@@ -41,7 +40,6 @@ var apiRoutes = require('./routes/api');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
