@@ -1,9 +1,10 @@
 p.social-buttons
   fieldset.inline
-    a.btn.btn-default.login-btn.vxb-button(href="/auth/voxbone")
-      img(src="/images/voxbone-x.png" width="25px" height="25px")
-      br
-      span.btn-txt Voxbone
+    if process.env.VOXBONE_OAUTH_ENABLED === 'true'
+      a.btn.btn-default.login-btn.vxb-button(href="/auth/voxbone")
+        img(src="/images/voxbone-x.png" width="25px" height="25px")
+        br
+        span.btn-txt Voxbone
     a.btn.btn-default.google-button.login-btn(href="/auth/google")
       span.fa.fa-google-plus
       br
