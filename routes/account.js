@@ -29,6 +29,8 @@ router.get('/login', utils.redirectIfLoggedIn, function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
+  return res.status(401).json();
+
   var formData = req.body;
   var result;
 
@@ -75,6 +77,7 @@ router.get('/edit', utils.isLoggedIn, function (req, res) {
 });
 
 router.post('/edit', utils.isLoggedIn, function (req, res) {
+  return res.status(401).json();
 
   var req_parameters = req.parameters;
   var formData = req_parameters.permit(PERMITTED_FIELDS).value();

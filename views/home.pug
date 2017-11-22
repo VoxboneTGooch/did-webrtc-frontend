@@ -14,7 +14,7 @@ append head
 
 block content
   .site-wrapper-inner.home-wrap
-    .container
+    //- .container
       .row.banner-content
         .col-sm-12.col-md-8
           if unsupported_browser
@@ -29,8 +29,8 @@ block content
             li web-based UC application integration,
             li creative consumer web apps!
           p #[a(href="/account/signup/") Sign-up], #[a(href="/demo") try it out], or see more info #[a(href="#setup") below].
-  .home-setup(id="setup")
-    .container
+  .home-setup(id="setup" ng-controller="HomeController")
+    .container.hidden
       .row
         .col-xs-12
           h3 Setup
@@ -72,7 +72,7 @@ block content
           else
             a.btn.btn-default-custom(href='/account/signup') Create an account
 
-  .contact(id="contact")
+  //- .contact(id="contact")
     .container
       .padding-contact
         .row
@@ -126,7 +126,7 @@ block content
       include footer
 
   //- <!-- Newsletter Modal -->
-  #newsletterModal.modal.fade(role="dialog")
+  //- #newsletterModal.modal.fade(role="dialog")
     .modal-dialog
       .modal-content
         .modal-header
@@ -138,5 +138,7 @@ block content
           p#subscription-message Placeholder
         .modal-footer
           button(type="button" class="btn btn-primary btn-lg" data-dismiss="modal") Dismiss
+
+  include eol-modal
 
   #voxButton_575b3d7e89005411004db935.voxButton(data-button_id='575b3d7e89005411004db935' data-text='click2vox Us Now' data-redirect_url='https://voxbone.com' data-did='883510080408' data-dial_pad='true' data-context='' data-send_digits='' data-caller_id='Click2Vox_did2webrtc' data-incompatible_browser_configuration='hide_widget' data-show_frame='false' data-show_branding='false' data-use_default_button_css='false' data-div_css_class_name='hidden' data-test_setup='false' data-button_css_class_name='btn btn-purple')
